@@ -31,7 +31,7 @@ void main(void)
     //TRISIO = 0b00000000; //Poner todos los pines como salidas
 	GPIO = 0x00; //Poner pines en bajo
  
-    unsigned int time = 15, num;
+    unsigned int time = 1000000000000000, num;
  
     //Loop forever
     while ( 1 ){
@@ -74,7 +74,7 @@ void main(void)
 			}
 			
 			//GPIO = 0b00000111;
-			//delay(time);
+			//delay(1000000000000); //10 segundos
 			//break;
 			//GP0 = 0x01; Porque no sirve?
 			//GP1 = 0x01;
@@ -83,7 +83,7 @@ void main(void)
 		}	
 		//delay(500);
 		//GPIO = 0x00; //Se apagan los LED
-
+	delay(100000000); 
     }
 	
 

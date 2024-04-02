@@ -113,6 +113,8 @@ code_labo1_dado	code
 ;   _delay
 ;   _delay
 ;   _delay
+;   _delay
+;   _delay
 ;2 compiler assigned registers:
 ;   r0x1008
 ;   STK00
@@ -131,7 +133,7 @@ _00115_DS_:
 ;	.line	39; "labo1_dado.c"	if(GP3 == 0){
 	BANKSEL	_GPIObits
 	BTFSC	_GPIObits,3
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 ;	.line	43; "labo1_dado.c"	switch (num){
 	MOVLW	0x05
 	BANKSEL	r0x1008
@@ -161,83 +163,90 @@ _00105_DS_:
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	46; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
 ;	.line	47; "labo1_dado.c"	break;
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 _00106_DS_:
 ;	.line	50; "labo1_dado.c"	GPIO = 0b0000010;	//(Se prende 2 LED)
 	MOVLW	0x02
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	51; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
 ;	.line	52; "labo1_dado.c"	break;
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 _00107_DS_:
 ;	.line	55; "labo1_dado.c"	GPIO = 0b0000100;	//(Se prende 3 LED)
 	MOVLW	0x04
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	56; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
 ;	.line	57; "labo1_dado.c"	break;
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 _00108_DS_:
 ;	.line	60; "labo1_dado.c"	GPIO = 0b0000101;	//(Se prende 3 LED + 1 LED = 4 LED)
 	MOVLW	0x05
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	61; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
 ;	.line	62; "labo1_dado.c"	break;
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 _00109_DS_:
 ;	.line	65; "labo1_dado.c"	GPIO = 0b0000110;	//(Se prende 3 LED + 2 LED = 5 LED)
 	MOVLW	0x06
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	66; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
 ;	.line	67; "labo1_dado.c"	break;
-	GOTO	_00115_DS_
+	GOTO	_00113_DS_
 _00110_DS_:
 ;	.line	70; "labo1_dado.c"	GPIO = 0b0000111;	//(Se prende 3 LED + 2 LED + 1 LED = 6 LED)
 	MOVLW	0x07
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 ;	.line	71; "labo1_dado.c"	delay(time);
-	MOVLW	0x0f
-	MOVWF	STK00
 	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0x80
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
-;	.line	74; "labo1_dado.c"	}
+_00113_DS_:
+;	.line	86; "labo1_dado.c"	delay(100000000); 
+	MOVLW	0x00
+	MOVWF	STK00
+	MOVLW	0xe1
+	PAGESEL	_delay
+	CALL	_delay
+	PAGESEL	$
 	GOTO	_00115_DS_
 ;	.line	90; "labo1_dado.c"	}
 	RETURN	
@@ -318,6 +327,6 @@ _00142_DS_:
 
 
 ;	code size estimation:
-;	  103+   29 =   132 instructions (  322 byte)
+;	  107+   31 =   138 instructions (  338 byte)
 
 	end
