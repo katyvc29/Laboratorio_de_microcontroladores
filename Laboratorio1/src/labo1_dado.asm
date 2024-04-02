@@ -66,7 +66,6 @@ STK00	res 1
 ; compiler-defined variables
 ;--------------------------------------------------------
 UDL_labo1_dado_0	udata
-r0x1008	res	1
 r0x1001	res	1
 r0x1000	res	1
 r0x1002	res	1
@@ -103,64 +102,42 @@ code_labo1_dado	code
 ;functions called:
 ;   _delay
 ;   _delay
-;   _delay
-;   _delay
-;2 compiler assigned registers:
+;1 compiler assigned register :
 ;   STK00
-;   r0x1008
 ;; Starting pCode block
 S_labo1_dado__main	code
 _main:
 ; 2 exit points
-;	.line	30; "labo1_dado.c"	TRISIO = 0b00000000; //Poner todos los pines como salidas
+;	.line	29; "labo1_dado.c"	TRISIO = 0b00001000; // ponemos pin 4 como entrada
+	MOVLW	0x08
 	BANKSEL	_TRISIO
-	CLRF	_TRISIO
+	MOVWF	_TRISIO
 ;	.line	31; "labo1_dado.c"	GPIO = 0x00; //Poner pines en bajo
 	BANKSEL	_GPIO
 	CLRF	_GPIO
-_00106_DS_:
-;	.line	38; "labo1_dado.c"	GP0 = 0x00;
-	BANKSEL	_GPIObits
-	BCF	_GPIObits,0
-;	.line	39; "labo1_dado.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	41; "labo1_dado.c"	GP0 = ~GP0;
-	BANKSEL	r0x1008
-	CLRF	r0x1008
-	BANKSEL	_GPIObits
-	BTFSS	_GPIObits,0
-	GOTO	_00001_DS_
-	BANKSEL	r0x1008
-	INCF	r0x1008,F
-_00001_DS_:
-	BANKSEL	r0x1008
-	COMF	r0x1008,W
-	MOVWF	r0x1008
-	RRF	r0x1008,W
-	BTFSC	STATUS,0
-	GOTO	_00002_DS_
-	BANKSEL	_GPIObits
-	BCF	_GPIObits,0
-_00002_DS_:
-	BTFSS	STATUS,0
-	GOTO	_00003_DS_
-	BANKSEL	_GPIObits
-	BSF	_GPIObits,0
-_00003_DS_:
-;	.line	42; "labo1_dado.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
+_00108_DS_:
+;	.line	37; "labo1_dado.c"	GPIO = 0x00;
+	BANKSEL	_GPIO
+	CLRF	_GPIO
+;	.line	38; "labo1_dado.c"	if(GP3 == 0){
+	BTFSC	_GPIObits,3
 	GOTO	_00106_DS_
-;	.line	45; "labo1_dado.c"	}
+;	.line	39; "labo1_dado.c"	GPIO = 0b00000111;
+	MOVLW	0x07
+	MOVWF	_GPIO
+_00106_DS_:
+;	.line	45; "labo1_dado.c"	delay(time);
+	MOVLW	0x32
+	MOVWF	STK00
+	MOVLW	0x00
+	PAGESEL	_delay
+	CALL	_delay
+	PAGESEL	$
+;	.line	46; "labo1_dado.c"	GPIO = 0x00;
+	BANKSEL	_GPIO
+	CLRF	_GPIO
+	GOTO	_00108_DS_
+;	.line	53; "labo1_dado.c"	}
 	RETURN	
 ; exit point of _main
 
@@ -182,33 +159,33 @@ _00003_DS_:
 S_labo1_dado__delay	code
 _delay:
 ; 2 exit points
-;	.line	47; "labo1_dado.c"	void delay(unsigned int tiempo)
+;	.line	55; "labo1_dado.c"	void delay(unsigned int tiempo)
 	BANKSEL	r0x1000
 	MOVWF	r0x1000
 	MOVF	STK00,W
 	MOVWF	r0x1001
-;	.line	52; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+;	.line	60; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 	CLRF	r0x1002
 	CLRF	r0x1003
-_00117_DS_:
+_00119_DS_:
 	BANKSEL	r0x1000
 	MOVF	r0x1000,W
 	SUBWF	r0x1003,W
 	BTFSS	STATUS,2
-	GOTO	_00138_DS_
+	GOTO	_00140_DS_
 	MOVF	r0x1001,W
 	SUBWF	r0x1002,W
-_00138_DS_:
+_00140_DS_:
 	BTFSC	STATUS,0
-	GOTO	_00119_DS_
+	GOTO	_00121_DS_
 ;;genSkipc:3307: created from rifx:00000000047A5780
-;	.line	53; "labo1_dado.c"	for(j=0;j<1275;j++);
+;	.line	61; "labo1_dado.c"	for(j=0;j<1275;j++);
 	MOVLW	0xfb
 	BANKSEL	r0x1004
 	MOVWF	r0x1004
 	MOVLW	0x04
 	MOVWF	r0x1005
-_00115_DS_:
+_00117_DS_:
 	MOVLW	0xff
 	BANKSEL	r0x1004
 	ADDWF	r0x1004,W
@@ -226,19 +203,19 @@ _00115_DS_:
 	MOVF	r0x1007,W
 	IORWF	r0x1006,W
 	BTFSS	STATUS,2
-	GOTO	_00115_DS_
-;	.line	52; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+	GOTO	_00117_DS_
+;	.line	60; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 	INCF	r0x1002,F
 	BTFSC	STATUS,2
 	INCF	r0x1003,F
-	GOTO	_00117_DS_
-_00119_DS_:
-;	.line	54; "labo1_dado.c"	}
+	GOTO	_00119_DS_
+_00121_DS_:
+;	.line	62; "labo1_dado.c"	}
 	RETURN	
 ; exit point of _delay
 
 
 ;	code size estimation:
-;	   65+   17 =    82 instructions (  198 byte)
+;	   54+   10 =    64 instructions (  148 byte)
 
 	end

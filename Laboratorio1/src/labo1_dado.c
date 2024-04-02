@@ -22,26 +22,34 @@
 //To program the chip using pk2cmd:
 //pk2cmd -M -PPIC16f887 -Fblink.hex
  
-void delay (unsigned inttiempo);
+void delay (unsigned int tiempo);
  
 void main(void)
 {
-
-    TRISIO = 0b00000000; //Poner todos los pines como salidas
+	TRISIO = 0b00001000; // ponemos pin 4 como entrada
+    //TRISIO = 0b00000000; //Poner todos los pines como salidas
 	GPIO = 0x00; //Poner pines en bajo
  
-    unsigned int time = 100;
+    unsigned int time = 50;
  
     //Loop forever
-    while ( 1 )
-    {
-			GP0 = 0x00;
-			delay(time);
-
-			GP0 = ~GP0;
-			delay(time);
+    while ( 1 ){
+	GPIO = 0x00;
+		if(GP3 == 0){
+			GPIO = 0b00000111;
+			//GP0 = 0x01; Porque no sirve?
+			//GP1 = 0x01;
+			//GP2 = 0x01;
+			
+		}	
+		delay(time);
+		GPIO = 0x00;
+		//if(GP3 == 1){ //Si se acciona el boton
+			//GP0 = 1;}
+	//delay(time);
     }
- 
+	
+
 }
 
 void delay(unsigned int tiempo)
