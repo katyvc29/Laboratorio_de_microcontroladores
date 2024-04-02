@@ -118,21 +118,26 @@ _main:
 _00108_DS_:
 ;	.line	37; "labo1_dado.c"	GPIO = 0x00;
 	BANKSEL	_GPIO
-;	.line	38; "labo1_dado.c"	if(GP3 == 0){
 	CLRF	_GPIO
-;	.line	39; "labo1_dado.c"	GP0 = 0x01;
-	BTFSS	_GPIObits,3
-;	.line	42; "labo1_dado.c"	delay(time);
-	BSF	_GPIObits,0
+;	.line	38; "labo1_dado.c"	if(GP3 == 0){
+	BTFSC	_GPIObits,3
+	GOTO	_00106_DS_
+;	.line	39; "labo1_dado.c"	GPIO = 0b00000111;
+	MOVLW	0x07
+	MOVWF	_GPIO
 _00106_DS_:
+;	.line	45; "labo1_dado.c"	delay(time);
 	MOVLW	0x32
 	MOVWF	STK00
 	MOVLW	0x00
 	PAGESEL	_delay
 	CALL	_delay
 	PAGESEL	$
+;	.line	46; "labo1_dado.c"	GPIO = 0x00;
+	BANKSEL	_GPIO
+	CLRF	_GPIO
 	GOTO	_00108_DS_
-;	.line	49; "labo1_dado.c"	}
+;	.line	53; "labo1_dado.c"	}
 	RETURN	
 ; exit point of _main
 
@@ -154,12 +159,12 @@ _00106_DS_:
 S_labo1_dado__delay	code
 _delay:
 ; 2 exit points
-;	.line	51; "labo1_dado.c"	void delay(unsigned int tiempo)
+;	.line	55; "labo1_dado.c"	void delay(unsigned int tiempo)
 	BANKSEL	r0x1000
 	MOVWF	r0x1000
 	MOVF	STK00,W
 	MOVWF	r0x1001
-;	.line	56; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+;	.line	60; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 	CLRF	r0x1002
 	CLRF	r0x1003
 _00119_DS_:
@@ -174,7 +179,7 @@ _00140_DS_:
 	BTFSC	STATUS,0
 	GOTO	_00121_DS_
 ;;genSkipc:3307: created from rifx:00000000047A5780
-;	.line	57; "labo1_dado.c"	for(j=0;j<1275;j++);
+;	.line	61; "labo1_dado.c"	for(j=0;j<1275;j++);
 	MOVLW	0xfb
 	BANKSEL	r0x1004
 	MOVWF	r0x1004
@@ -199,18 +204,18 @@ _00117_DS_:
 	IORWF	r0x1006,W
 	BTFSS	STATUS,2
 	GOTO	_00117_DS_
-;	.line	56; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+;	.line	60; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 	INCF	r0x1002,F
 	BTFSC	STATUS,2
 	INCF	r0x1003,F
 	GOTO	_00119_DS_
 _00121_DS_:
-;	.line	58; "labo1_dado.c"	}
+;	.line	62; "labo1_dado.c"	}
 	RETURN	
 ; exit point of _delay
 
 
 ;	code size estimation:
-;	   51+    9 =    60 instructions (  138 byte)
+;	   54+   10 =    64 instructions (  148 byte)
 
 	end

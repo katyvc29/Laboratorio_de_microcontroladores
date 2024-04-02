@@ -36,10 +36,14 @@ void main(void)
     while ( 1 ){
 	GPIO = 0x00;
 		if(GP3 == 0){
-			GP0 = 0x01;
+			GPIO = 0b00000111;
+			//GP0 = 0x01; Porque no sirve?
+			//GP1 = 0x01;
+			//GP2 = 0x01;
 			
 		}	
 		delay(time);
+		GPIO = 0x00;
 		//if(GP3 == 1){ //Si se acciona el boton
 			//GP0 = 1;}
 	//delay(time);
