@@ -1,6 +1,6 @@
 gplink-1.5.0 #1285 (Sep 12 2016)
 Copyright (c) 1998-2016 gputils project
-Listing File Generated: 4-1-2024  18:25:04
+Listing File Generated: 4-1-2024  23:05:03
 
 
 Address  Value    Disassembly              Source
@@ -119,6 +119,8 @@ Address  Value    Disassembly              Source
                                            ;functions called:
                                            ;   _delay
                                            ;   _delay
+                                           ;   _delay
+                                           ;   _delay
                                            ;1 compiler assigned register :
                                            ;   STK00
                                            ;; Starting pCode block
@@ -135,22 +137,30 @@ Address  Value    Disassembly              Source
                                            _00108_DS_:
                                            ;	.line	37; "labo1_dado.c"	GPIO = 0x00;
 000102   1283     bcf     0x03, 0x5        	BANKSEL	_GPIO
-                                           ;	.line	38; "labo1_dado.c"	if(GP3 == 0){
 000103   0185     clrf    0x05             	CLRF	_GPIO
+                                           ;	.line	38; "labo1_dado.c"	if(GP3 == 0){
+000104   1985     btfsc   0x05, 0x3        	BTFSC	_GPIObits,3
+000105   290b     goto    0x010b           	GOTO	_00106_DS_
                                            ;	.line	39; "labo1_dado.c"	GP0 = 0x01;
-000104   1d85     btfss   0x05, 0x3        	BTFSS	_GPIObits,3
-                                           ;	.line	42; "labo1_dado.c"	delay(time);
-000105   1405     bsf     0x05, 0x0        	BSF	_GPIObits,0
-                                           _00106_DS_:
-000106   3032     movlw   0x32             	MOVLW	0x32
-000107   00ff     movwf   0x7f             	MOVWF	STK00
-000108   3000     movlw   0x00             	MOVLW	0x00
+000106   1405     bsf     0x05, 0x0        	BSF	_GPIObits,0
+                                           ;	.line	40; "labo1_dado.c"	delay(time);
+000107   3032     movlw   0x32             	MOVLW	0x32
+000108   00ff     movwf   0x7f             	MOVWF	STK00
+000109   3000     movlw   0x00             	MOVLW	0x00
                                            	PAGESEL	_delay
-000109   20d2     call    0x00d2           	CALL	_delay
+00010a   20d2     call    0x00d2           	CALL	_delay
                                            	PAGESEL	$
-00010a   2902     goto    0x0102           	GOTO	_00108_DS_
-                                           ;	.line	49; "labo1_dado.c"	}
-00010b   0008     return                   	RETURN	
+                                           _00106_DS_:
+                                           ;	.line	43; "labo1_dado.c"	delay(time);
+00010b   3032     movlw   0x32             	MOVLW	0x32
+00010c   00ff     movwf   0x7f             	MOVWF	STK00
+00010d   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+00010e   20d2     call    0x00d2           	CALL	_delay
+                                           	PAGESEL	$
+00010f   2902     goto    0x0102           	GOTO	_00108_DS_
+                                           ;	.line	50; "labo1_dado.c"	}
+000110   0008     return                   	RETURN	
                                            ; exit point of _main
 
                                            ;***
@@ -171,12 +181,12 @@ Address  Value    Disassembly              Source
                                            S_labo1_dado__delay	code
                                            _delay:
                                            ; 2 exit points
-                                           ;	.line	51; "labo1_dado.c"	void delay(unsigned int tiempo)
+                                           ;	.line	52; "labo1_dado.c"	void delay(unsigned int tiempo)
 0000d2   1683     bsf     0x03, 0x5        	BANKSEL	r0x1000
 0000d3   00ad     movwf   0x2d             	MOVWF	r0x1000
 0000d4   087f     movf    0x7f, 0x0        	MOVF	STK00,W
 0000d5   00ac     movwf   0x2c             	MOVWF	r0x1001
-                                           ;	.line	56; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+                                           ;	.line	57; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 0000d6   01ae     clrf    0x2e             	CLRF	r0x1002
 0000d7   01af     clrf    0x2f             	CLRF	r0x1003
                                            _00119_DS_:
@@ -191,7 +201,7 @@ Address  Value    Disassembly              Source
 0000df   1803     btfsc   0x03, 0x0        	BTFSC	STATUS,0
 0000e0   28fc     goto    0x00fc           	GOTO	_00121_DS_
                                            ;;genSkipc:3307: created from rifx:00000000047A5780
-                                           ;	.line	57; "labo1_dado.c"	for(j=0;j<1275;j++);
+                                           ;	.line	58; "labo1_dado.c"	for(j=0;j<1275;j++);
 0000e1   30fb     movlw   0xfb             	MOVLW	0xfb
 0000e2   1683     bsf     0x03, 0x5        	BANKSEL	r0x1004
 0000e3   00b0     movwf   0x30             	MOVWF	r0x1004
@@ -216,18 +226,18 @@ Address  Value    Disassembly              Source
 0000f5   0432     iorwf   0x32, 0x0        	IORWF	r0x1006,W
 0000f6   1d03     btfss   0x03, 0x2        	BTFSS	STATUS,2
 0000f7   28e6     goto    0x00e6           	GOTO	_00117_DS_
-                                           ;	.line	56; "labo1_dado.c"	for(i=0;i<tiempo;i++)
+                                           ;	.line	57; "labo1_dado.c"	for(i=0;i<tiempo;i++)
 0000f8   0aae     incf    0x2e, 0x1        	INCF	r0x1002,F
 0000f9   1903     btfsc   0x03, 0x2        	BTFSC	STATUS,2
 0000fa   0aaf     incf    0x2f, 0x1        	INCF	r0x1003,F
 0000fb   28d8     goto    0x00d8           	GOTO	_00119_DS_
                                            _00121_DS_:
-                                           ;	.line	58; "labo1_dado.c"	}
+                                           ;	.line	59; "labo1_dado.c"	}
 0000fc   0008     return                   	RETURN	
                                            ; exit point of _delay
 
 
                                            ;	code size estimation:
-                                           ;	   51+    9 =    60 instructions (  138 byte)
+                                           ;	   56+   11 =    67 instructions (  156 byte)
 
                                            	end

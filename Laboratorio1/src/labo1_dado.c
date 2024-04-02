@@ -37,6 +37,7 @@ void main(void)
 	GPIO = 0x00;
 		if(GP3 == 0){
 			GP0 = 0x01;
+			delay(time);
 			
 		}	
 		delay(time);
