@@ -7,7 +7,6 @@ word __at 0x2007 __CONFIG = ( _WDT_OFF & _MCLRE_OFF ); // Se desactivan las macr
 
  
 void delay (unsigned int tiempo);
-//unsigned char numero_aleatorio();
 unsigned int lfsr(unsigned int seed, unsigned int taps);
  
 void main(void)
@@ -15,8 +14,7 @@ void main(void)
 	TRISIO = 0b00001000; // ponemos pin 4 como entrada para usar GP3 como entrada
 	GPIO = 0x00; //Poner pines en bajo
  
-    unsigned int time = 200; // 0.5 s
-	//unsigned char num;
+    unsigned int time = 200; // 0.2 s
     unsigned int seed = 0xACE1u;  // Semilla inicial
     unsigned int taps = 0xB400u;  // Patrón de retroalimentación (polinomio)
     unsigned int bit;
