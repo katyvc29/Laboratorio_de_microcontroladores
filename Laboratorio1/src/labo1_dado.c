@@ -1,27 +1,33 @@
 #include <pic14/pic12f683.h> // Llamamos al archivo del PIC que estamos usando
 
+
 typedef unsigned int word ;
 
 word __at 0x2007 __CONFIG = ( _WDT_OFF & _MCLRE_OFF ); // Se desactivan las macros
 
  
 void delay (unsigned int tiempo);
-unsigned char numero_aleatorio();
+//unsigned char numero_aleatorio();
+unsigned int lfsr(unsigned int seed, unsigned int taps);
  
 void main(void)
 {
 	TRISIO = 0b00001000; // ponemos pin 4 como entrada para usar GP3 como entrada
 	GPIO = 0x00; //Poner pines en bajo
  
-    unsigned int time = 500; // 0.5 s
-	unsigned char num;
+    unsigned int time = 200; // 0.5 s
+	//unsigned char num;
+    unsigned int seed = 0xACE1u;  // Semilla inicial
+    unsigned int taps = 0xB400u;  // Patrón de retroalimentación (polinomio)
+    unsigned int bit;
  
     //Loop forever
     while ( 1 ){
 		if(GP3 == 1){
-			num = numero_aleatorio(); // Se llama la función que genera el numero aleatorio
+			seed = lfsr(seed, taps);  // Generar el siguiente valor del LFSR
+        	bit = (seed % 6) + 1;  // Obtener número entre 1 y 6
 
-			switch (num){
+			switch (bit){
 				case 1: //cuando num es 1 
 				GPIO = 0b0000001;	//(Se prende 1 LED)
 				delay(time);
@@ -73,14 +79,14 @@ void delay(unsigned int tiempo)
 	  for(j=0;j<1275;j++);
 }
 
-unsigned char numero_aleatorio() {
-    static unsigned char lfsr = 0x08; //  valor inicial no puede ser 0
-    unsigned char bit;  // bit de salida
 
-    do {
-        bit = ((lfsr >> 0) ^ (lfsr >> 1)) & 1;  // Genera un bit aleatorio mediante XOR entre dos bits del registro LFSR
-        lfsr = (lfsr >> 1) | (bit << 2);	// Desplaza el registro LFSR un bit a la derecha y coloca el nuevo bit generado en la posición más significativa
-    } while (lfsr > 6);  // Repite el proceso hasta que el valor del registro LFSR esté entre 1 y 6
 
-    return lfsr;  
+// Declaración de la función para el LFSR
+unsigned int lfsr(unsigned int seed, unsigned int taps) {
+    unsigned int lsb = seed & 1;
+    seed >>= 1;
+    if (lsb == 1) {
+        seed ^= taps;
+    }
+    return seed;
 }
