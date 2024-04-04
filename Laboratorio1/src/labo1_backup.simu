@@ -1,156 +1,156 @@
 <circuit Speed_sps="1000000" Speed_per="100" animate="0" noLinAcc="5" Simu_Step_nS="1000" reactStep="50" type="simulide_0.4">
 
-Unique  Id: Probe-310: 
-Circuit Id: Probe-310
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-310" y="-192" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-420" objectName="Probe-310"/>
-
-Unique  Id: Probe-309: 
-Circuit Id: Probe-309
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-309" y="-128" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-396" objectName="Probe-309"/>
-
-Unique  Id: Node-307: 
-Circuit Id: Node-307
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-307" y="-168" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-444" objectName="Node-307"/>
-
-Unique  Id: Resistor-304: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-444" objectName="Resistor-304" Unit=" Ω"/>
-
-Unique  Id: Node-302: 
-Circuit Id: Node-302
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-302" y="-168" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-432" objectName="Node-302"/>
-
-Unique  Id: Led-290: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-412" objectName="Led-290"/>
-
-Unique  Id: Resistor-289: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-412" objectName="Resistor-289" Unit=" Ω"/>
-
-Unique  Id: Ground-288: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-412" objectName="Ground-288"/>
-
-Unique  Id: Led-282: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-444" objectName="Led-282"/>
-
-Unique  Id: Ground-280: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-444" objectName="Ground-280"/>
-
-Unique  Id: Led-274: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-476" objectName="Led-274"/>
-
-Unique  Id: Resistor-273: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-476" objectName="Resistor-273" Unit=" Ω"/>
-
-Unique  Id: Ground-272: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-476" objectName="Ground-272"/>
-
-Unique  Id: Node-258: 
-Circuit Id: Node-258
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-258" y="-172" valLabely="0" valLabRot="0" circRot="3.560457698844099e-307" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-316" objectName="Node-258"/>
-
-Unique  Id: Probe-119: 
-Circuit Id: Probe-119
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-119" y="-200" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-300" objectName="Probe-119"/>
-
-Unique  Id: Probe-67: 
-Circuit Id: Probe-67
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-67" y="-208" valLabely="0" valLabRot="45" circRot="-5.486573998259692e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-220" objectName="Probe-67"/>
-
-Unique  Id: Probe-66: 
-Circuit Id: Probe-66
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-66" y="-160" valLabely="0" valLabRot="45" circRot="3e-323" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-536" objectName="Probe-66"/>
-
-Unique  Id: Probe-65: 
-Circuit Id: Probe-65
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-65" y="-144" valLabely="0" valLabRot="45" circRot="-5.486129297296288e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-216" objectName="Probe-65"/>
-
-Unique  Id: Push-32: 
-Circuit Id: Push-32
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Push-32" y="-216" valLabely="0" valLabRot="0" circRot="-4.497509990966222e+201" hflip="1" Norm_Close="false" mainComp="false" Poles="1" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="0" itemtype="Push" circPos="0,0" Key="" labelrot="0" vflip="1" labely="-24" x="-612" objectName="Push-32"/>
-
-Unique  Id: Resistor-30: 
-Circuit Id: Resistor-30
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-30" y="-136" valLabely="6" valLabRot="0" circRot="-5.486354255283609e+303" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-612" objectName="Resistor-30" Unit=" Ω"/>
-
-Unique  Id: Ground-29: 
-Circuit Id: Ground-29
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-29" y="-72" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-612" objectName="Ground-29"/>
-
-Unique  Id: Fixed Voltage-27: 
-Circuit Id: Fixed Voltage-27
-<item labelx="-64" Show_id="false" boardRot="-1e+06" id="Fixed Voltage-27" y="-264" valLabely="8" valLabRot="0" circRot="nan" hflip="1" mainComp="false" Out="true" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Fixed Voltage" circPos="0,0" labelrot="0" vflip="1" Voltage="5" labely="-24" Show_Volt="true" x="-612" objectName="Fixed Voltage-27" Unit=" V"/>
-
-Unique  Id: pic12f683-25: 
-Circuit Id: pic12f683-25
-<item varList=",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," labelx="0" Show_id="true" boardRot="-1e+06" Auto_Load="false" id="pic12f683-25" y="-208" valLabely="0" valLabRot="0" circRot="nan" hflip="1" Mhz="20" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="PIC" Name="" circPos="0,0" Logic_Symbol="false" labelrot="0" vflip="1" labely="-20" eeprom="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" Program="labo1_dado.hex" x="-524" objectName="pic12f683-25"/>
-
-Unique  Id: Led-2: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-108" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-232" objectName="Led-2"/>
-
-Unique  Id: Resistor-3: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-152" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-232" objectName="Resistor-3" Unit=" Ω"/>
-
-Unique  Id: Ground-4: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-52" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-232" objectName="Ground-4"/>
-
-Unique  Id: Probe-220: 
-Circuit Id: Probe-65
-<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-65" y="-124" valLabely="0" valLabRot="45" circRot="-5.486129297296288e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-280" objectName="Probe-220"/>
-
-Unique  Id: Resistor-221: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-296" objectName="Resistor-221" Unit=" Ω"/>
-
-Unique  Id: Ground-222: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-296" objectName="Ground-222"/>
-
-Unique  Id: Led-223: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-296" objectName="Led-223"/>
-
-Unique  Id: Resistor-229: 
-Circuit Id: Resistor-5
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-344" objectName="Resistor-229" Unit=" Ω"/>
-
-Unique  Id: Led-230: 
-Circuit Id: Led-4
-<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-344" objectName="Led-230"/>
-
-Unique  Id: Ground-231: 
-Circuit Id: Ground-6
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-344" objectName="Ground-231"/>
-
-Unique  Id: Capacitor-329: 
-Circuit Id: Capacitor-329
-<item labelx="-16" Show_id="false" boardRot="-1e+06" Capacitance="150" id="Capacitor-329" y="-212" valLabely="8" valLabRot="0" circRot="7.497789575003433e+247" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Capacitor" circPos="0,0" labelrot="0" vflip="1" Show_Cap="true" labely="-24" x="-556" objectName="Capacitor-329" Unit=" uF"/>
-
-Unique  Id: Node-331: 
-Circuit Id: Node-331
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-331" y="-240" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-612" objectName="Node-331"/>
-
-Unique  Id: Resistor-336: 
-Circuit Id: Resistor-30
-<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-30" y="-176" valLabely="6" valLabRot="0" circRot="-5.486354255283609e+303" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="360" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-580" objectName="Resistor-336" Unit=" Ω"/>
+Unique  Id: Node-342: 
+Circuit Id: Node-342
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-342" y="-176" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-552" objectName="Node-342"/>
 
 Unique  Id: Node-338: 
 Circuit Id: Node-338
 <item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-338" y="-176" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-612" objectName="Node-338"/>
 
-Unique  Id: Node-342: 
-Circuit Id: Node-342
-<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-342" y="-176" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-552" objectName="Node-342"/>
+Unique  Id: Resistor-336: 
+Circuit Id: Resistor-30
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-30" y="-176" valLabely="6" valLabRot="0" circRot="-5.486354255283609e+303" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="360" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-580" objectName="Resistor-336" Unit=" Ω"/>
+
+Unique  Id: Node-331: 
+Circuit Id: Node-331
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-331" y="-240" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-612" objectName="Node-331"/>
+
+Unique  Id: Capacitor-329: 
+Circuit Id: Capacitor-329
+<item labelx="-16" Show_id="false" boardRot="-1e+06" Capacitance="150" id="Capacitor-329" y="-212" valLabely="8" valLabRot="0" circRot="7.497789575003433e+247" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Capacitor" circPos="0,0" labelrot="0" vflip="1" Show_Cap="true" labely="-24" x="-556" objectName="Capacitor-329" Unit=" uF"/>
+
+Unique  Id: Ground-231: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-344" objectName="Ground-231"/>
+
+Unique  Id: Led-230: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-344" objectName="Led-230"/>
+
+Unique  Id: Resistor-229: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-344" objectName="Resistor-229" Unit=" Ω"/>
+
+Unique  Id: Led-223: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-296" objectName="Led-223"/>
+
+Unique  Id: Ground-222: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-296" objectName="Ground-222"/>
+
+Unique  Id: Resistor-221: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-296" objectName="Resistor-221" Unit=" Ω"/>
+
+Unique  Id: Probe-220: 
+Circuit Id: Probe-65
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-65" y="-124" valLabely="0" valLabRot="45" circRot="-5.486129297296288e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-280" objectName="Probe-220"/>
+
+Unique  Id: Ground-4: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-52" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-232" objectName="Ground-4"/>
+
+Unique  Id: Resistor-3: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-152" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-232" objectName="Resistor-3" Unit=" Ω"/>
+
+Unique  Id: Led-2: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-108" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-232" objectName="Led-2"/>
+
+Unique  Id: pic12f683-25: 
+Circuit Id: pic12f683-25
+<item varList=",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," labelx="0" Show_id="true" boardRot="-1e+06" Auto_Load="false" id="pic12f683-25" y="-208" valLabely="0" valLabRot="0" circRot="nan" hflip="1" Mhz="20" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="PIC" Name="" circPos="0,0" Logic_Symbol="false" labelrot="0" vflip="1" labely="-20" eeprom="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" Program="labo1_dado.hex" x="-524" objectName="pic12f683-25"/>
+
+Unique  Id: Fixed Voltage-27: 
+Circuit Id: Fixed Voltage-27
+<item labelx="-64" Show_id="false" boardRot="-1e+06" id="Fixed Voltage-27" y="-264" valLabely="8" valLabRot="0" circRot="nan" hflip="1" mainComp="false" Out="true" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Fixed Voltage" circPos="0,0" labelrot="0" vflip="1" Voltage="5" labely="-24" Show_Volt="true" x="-612" objectName="Fixed Voltage-27" Unit=" V"/>
+
+Unique  Id: Ground-29: 
+Circuit Id: Ground-29
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-29" y="-72" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-612" objectName="Ground-29"/>
+
+Unique  Id: Resistor-30: 
+Circuit Id: Resistor-30
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-30" y="-136" valLabely="6" valLabRot="0" circRot="-5.486354255283609e+303" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-612" objectName="Resistor-30" Unit=" Ω"/>
+
+Unique  Id: Push-32: 
+Circuit Id: Push-32
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Push-32" y="-216" valLabely="0" valLabRot="0" circRot="-4.497509990966222e+201" hflip="1" Norm_Close="false" mainComp="false" Poles="1" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="0" itemtype="Push" circPos="0,0" Key="" labelrot="0" vflip="1" labely="-24" x="-612" objectName="Push-32"/>
+
+Unique  Id: Probe-65: 
+Circuit Id: Probe-65
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-65" y="-144" valLabely="0" valLabRot="45" circRot="-5.486129297296288e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-216" objectName="Probe-65"/>
+
+Unique  Id: Probe-66: 
+Circuit Id: Probe-66
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-66" y="-160" valLabely="0" valLabRot="45" circRot="3e-323" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-536" objectName="Probe-66"/>
+
+Unique  Id: Probe-67: 
+Circuit Id: Probe-67
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-67" y="-208" valLabely="0" valLabRot="45" circRot="-5.486573998259692e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-220" objectName="Probe-67"/>
+
+Unique  Id: Probe-119: 
+Circuit Id: Probe-119
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-119" y="-200" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-300" objectName="Probe-119"/>
+
+Unique  Id: Node-258: 
+Circuit Id: Node-258
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-258" y="-172" valLabely="0" valLabRot="0" circRot="3.560457698844099e-307" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-316" objectName="Node-258"/>
+
+Unique  Id: Ground-272: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-476" objectName="Ground-272"/>
+
+Unique  Id: Resistor-273: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-476" objectName="Resistor-273" Unit=" Ω"/>
+
+Unique  Id: Led-274: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-476" objectName="Led-274"/>
+
+Unique  Id: Ground-280: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-444" objectName="Ground-280"/>
+
+Unique  Id: Led-282: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-444" objectName="Led-282"/>
+
+Unique  Id: Ground-288: 
+Circuit Id: Ground-6
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Ground-6" y="-36" valLabely="0" valLabRot="0" circRot="1.6022093579893784e-306" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Ground" circPos="0,0" labelrot="0" vflip="1" labely="8" x="-412" objectName="Ground-288"/>
+
+Unique  Id: Resistor-289: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-412" objectName="Resistor-289" Unit=" Ω"/>
+
+Unique  Id: Led-290: 
+Circuit Id: Led-4
+<item Color="0" Grounded="false" labelx="-16" Show_id="false" boardRot="-1e+06" id="Led-4" y="-88" valLabely="0" valLabRot="0" circRot="0" hflip="1" Threshold="2.4" mainComp="false" Resistance="0.6" boardPos="-1e+06,-1e+06" rotation="90" MaxCurrent="0.03" valLabelx="0" itemtype="Led" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-412" objectName="Led-290"/>
+
+Unique  Id: Node-302: 
+Circuit Id: Node-302
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-302" y="-168" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-432" objectName="Node-302"/>
+
+Unique  Id: Resistor-304: 
+Circuit Id: Resistor-5
+<item Show_res="true" labelx="-12" Show_id="false" boardRot="-1e+06" id="Resistor-5" y="-136" valLabely="6" valLabRot="0" circRot="0" hflip="1" mainComp="false" Resistance="120" boardPos="-1e+06,-1e+06" rotation="90" valLabelx="-16" itemtype="Resistor" circPos="0,0" labelrot="0" vflip="1" labely="-20" x="-444" objectName="Resistor-304" Unit=" Ω"/>
+
+Unique  Id: Node-307: 
+Circuit Id: Node-307
+<item labelx="-16" Show_id="false" boardRot="-1e+06" id="Node-307" y="-168" valLabely="0" valLabRot="0" circRot="0" hflip="1" mainComp="false" boardPos="-1e+06,-1e+06" rotation="0" valLabelx="0" itemtype="Node" circPos="0,0" labelrot="0" vflip="1" labely="-24" x="-444" objectName="Node-307"/>
+
+Unique  Id: Probe-309: 
+Circuit Id: Probe-309
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-309" y="-128" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-396" objectName="Probe-309"/>
+
+Unique  Id: Probe-310: 
+Circuit Id: Probe-310
+<item labelx="16" Show_id="false" boardRot="-1e+06" id="Probe-310" y="-192" valLabely="0" valLabRot="45" circRot="-5.486129280331905e+303" hflip="1" Threshold="2.5" mainComp="false" boardPos="-1e+06,-1e+06" rotation="-45" valLabelx="16" itemtype="Probe" circPos="0,0" Show_volt="true" labelrot="45" vflip="1" labely="-16" x="-420" objectName="Probe-310"/>
 
 Unique  Id: Connector-31: 
 Circuit Id: Connector-31
