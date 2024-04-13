@@ -22,6 +22,10 @@ int main(void)
     GIMSK |= (1 << INT0); // Botón 1
     MCUCR |= (1 << ISC00) | (1 << ISC01); // Se configura para que la iterrupción se de en flanco de bajada
 
+    GIMSK |= (1 << INT1); // Botón 2
+    MCUCR |= (1 << ISC10) | (1 << ISC11); // Se configura para que la iterrupción se de en flanco de bajada
+
+
     // Configuración del  Timer0 para las interrupciones (cada 1ms)
     TCCR0A = 0;
     TCCR0B = (1 << CS02) | (1 << CS00); // Preescalador   Timer0 contará a una velocidad de 1/1024 del reloj del microcontrolador.
