@@ -1,14 +1,15 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
-//#include <util/delay.h>
 #include <stdbool.h>
+//#include <util/delay.h>
 
 //Estados
-#define BOTON_NO_PRESIONADO 1
-#define BOTON_PRESIONADO    2
-#define MOMENTO_INTERMEDIO  3
-#define PASO_PEATONES       4
-#define PEATONES_BLINKING   5
+#define BOTON_NO_PRESIONADO         1
+#define BOTON_PRESIONADO            2
+#define MOMENTO_INTERMEDIO          3
+#define PASO_PEATONES               4
+#define PEATONES_BLINKING           5
+#define PASO_PEATONAL_DESHABILITADO 6
 
 
 // Variables Globales
@@ -21,11 +22,9 @@ int siguiente_estado;
 void maquina_estados();
 
 
-//volatile bool boton = false;
-
 int main(void)
 {
-    //DDRB = 0x08; //Configuracion del puerto
+    // Configuración de los puertos
     PORTB = 0b00000000; // Se configura puerto B en 0 (limpiamos)
     PIND = 0b00000000;  // Este no estoy segura
     PORTD = 0b00000000; // Puerto D se establece en 0 (limpiamos)
@@ -63,7 +62,7 @@ void maquina_estados(){
       switch (estado) {
         case BOTON_NO_PRESIONADO:
           PORTB = 0b00110010;  // Estado inicial donde la luz verde de los carros esta encendida siempre
-          if (timer >= 68 && boton) { //Despues de 10s 680
+          if (timer >= 680 && boton) { //Despues de 10s 
               //PORTB &= ~(1 << PB0);  // Asegurarse que B0 esté apagado, ya que es la luz verde del semaforo peatonal
               //PORTB &= ~(1 << PB6);  // Asegurarse que B6 esté apagado, ya que es la luz verde del semaforo peatonal
               //PORTB &= ~(1 << PB4); // Se apaga el LED verde del semaforo vehicular
@@ -74,7 +73,7 @@ void maquina_estados(){
           
           break;
         case BOTON_PRESIONADO:
-            if (timer < 68) { // Despues de 3 segundos 204
+            if (timer < 204) { // Despues de 3 segundos 
             // Parpadea cada segundo para que sea visible
             if (blink_counter % 2 == 0) {
                 PORTB |= (1 << PB1);  // Encender LED B1
@@ -87,8 +86,6 @@ void maquina_estados(){
             }
 
             // Incrementar el contador de parpadeo cada segundo
-            //if (timer != blink_counter) {
-            //    timer = timer;
             if (timer != blink_counter) {
                 blink_counter = timer;
             }
@@ -110,7 +107,7 @@ void maquina_estados(){
                 timer = 0;  // Resetear el contador
             }
           break;
-          case PASO_PEATONES:
+        case PASO_PEATONES:
             //Se enciende la luz roja del semaforo vehicular
             PORTB |= (1 << PB2);  // Asegurarse que B2 rojo (vehicular) este encendido
 
@@ -125,13 +122,13 @@ void maquina_estados(){
             PORTB |= (1 << PB6);
 
         
-            if (timer >= 68) { //10 segundos 680
+            if (timer >= 680) { //10 segundos 
                   PORTB &= ~(1 << PB4);  // Asegurarse que B4 verde (vehicular) esté apagado
                   siguiente_estado = PEATONES_BLINKING;
                   timer = 0;
                 }
                 break;
-          case PEATONES_BLINKING:
+        case PEATONES_BLINKING:
               if (timer < 204) { // Después de 3s 204
                   // Parpadea cada segundo para que sea visible
                   if (blink_counter % 2 == 0) {
@@ -146,10 +143,16 @@ void maquina_estados(){
                   }
               } else {
                   PORTB &= ~((1 << PB0) | (1 << PB6));  // Apagar LED B0 y B6 después de 3 segundos, para detener los peatones
-                  siguiente_estado = BOTON_NO_PRESIONADO;
+                  PORTB |= (1 << PB1) | (1 << PB5);  // Encender LED rojos peatonales B1 y B5, indicar que ya no hay paso peatonal
+                  siguiente_estado = PASO_PEATONAL_DESHABILITADO;
                   timer = 0;  // Resetear el contador
               }
               break;
+        case PASO_PEATONAL_DESHABILITADO:
+            if (timer >= 68) {
+                siguiente_estado = BOTON_NO_PRESIONADO;
+            }
+
   }
   estado = siguiente_estado;
 
