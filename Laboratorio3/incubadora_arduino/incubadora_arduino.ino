@@ -6,13 +6,6 @@
 #define LED_VERDE 12
 #define LED_ROJO 13
 
-/* Conexiones del PCD8544
-#define CLK 3
-#define DIN 4
-#define DC 5
-#define CS 6
-#define RST 7*/
-
 //Pulsadores y potenciometro
 #define PUL1 A5 //Impresion pantalla LCD
 #define PUL2 A4 //Comunicacion PC
@@ -25,7 +18,7 @@ PCD8544 LCD;
 double SetPoint, Input, Output;
 
 //Variable del PID
-PID myPID(&Input, &Output, &SetPoint, 2, 5, 1 , DIRECT); // ganancias escogidas arbitrariamente
+PID myPID(&Input, &Output, &SetPoint, 0.2, 0.1, 0.1, DIRECT); // ganancias escogidas arbitrariamente
 
 
 //Funcion de la planta para simular lazo cerrado
@@ -56,6 +49,7 @@ float simPlanta(float Q) {
 
 
 
+
 void setup() {
   
   Serial.begin(9600); // Inicializa la comunicación serial
@@ -79,7 +73,7 @@ void setup() {
   //Control PID
   //Inicializar variables
   //Se mapea el punto de operacion del potenciometro
-  operacion = (map(analogRead(POT), 0, 1023, 0, 80));
+  operacion = map(analogRead(POT), 0, 1023, 0, 80);
   SetPoint = map(operacion, 0, 80, 0, 255);
   float TempWatts = (int)Output * 20.0 / 255;
   Temperatura =  simPlanta(TempWatts);
@@ -100,11 +94,11 @@ void loop() {
       float TempWatts = (int)Output * 20.0 / 255;
       Temperatura =  simPlanta(TempWatts);
       Estado = 1;
+      break;
     
     case 1:
       Input = map(Temperatura, 0, 1023, 0, 255);
       myPID.Compute();
-      //analogic.write()
 
       if(Temperatura > operacion){
         Temperatura = Temperatura - 1.5;
@@ -116,6 +110,7 @@ void loop() {
         Temperatura = map(operacion, 0, 80, 0, 255);
         Estado = 0;
       }
+    break;
   }      
 
   //Condicional para encender los leds
@@ -153,8 +148,6 @@ void loop() {
     Serial.print("Temperatura: ");
     Serial.print(Temperatura);
   }
-  
-
-  }
+}
 
 
