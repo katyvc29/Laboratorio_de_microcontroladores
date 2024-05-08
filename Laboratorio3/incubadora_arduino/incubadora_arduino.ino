@@ -2,30 +2,30 @@
 #include <PCD8544.h>
 
 //Leds azul, verde y rojo en ese orden
-#define LED_AZUL 8;
-#define LED_VERDE 12;
-#define LED_ROJO 13;
+#define LED_AZUL 8
+#define LED_VERDE 12
+#define LED_ROJO 13
 
 // Conexiones del PCD8544
-#define CLK 3;
-#define DIN 4;
-#define DC 5;
-#define CS 6;
-#define RST 7;
+#define CLK 3
+#define DIN 4
+#define DC 5
+#define CS 6
+#define RST 7
 
 //Pulsadores y potenciometro
-#define PUL1 A5; //Impresion pantalla LCD
-#define PUL2 A4; //Comunicacion PC
-#define POT A0;
+#define PUL1 A5 //Impresion pantalla LCD
+#define PUL2 A4 //Comunicacion PC
+#define POT A0
 
 // Variable par manejo de la pantalla
 PCD8544 LCD;
 
 //Variables de control para el PID
-double Setpoint, Input, Output;
+double SetPoint, Input, Output;
 
 //Variable del PID
-PID myPID(&Input, &Output, &Setpoint, 2, 5, 1 , DIRECT); // ganancias escogidas arbitrariamente
+PID myPID(&Input, &Output, &SetPoint, 2, 5, 1 , DIRECT); // ganancias escogidas arbitrariamente
 
 
 //Funcion de la planta para simular lazo cerrado
@@ -38,8 +38,8 @@ float simPlanta(float Q) {
   float masa = 10 ; // g
   float Tamb = 25; // Temperatura ambiente en C
   static float T = Tamb; // Temperatura en C
-  static uint32 t last = 0;
-  uint32 t interval = 100; // ms
+  static uint32_t last = 0;
+  uint32_t interval = 100; // ms
     
   if ( millis () - last >= interval) {
       last += interval;
@@ -49,6 +49,12 @@ float simPlanta(float Q) {
 
   return T;
     }
+
+  int Estado = 0;
+  int operacion = 0;
+  double Temperatura = 0;
+
+
 
 void setup() {
   
@@ -75,7 +81,7 @@ void setup() {
   operacion = (map(analogRead(POT), 0, 1023, 0, 80));
   SetPoint = map(operacion, 0, 80, 0, 255);
   float TempWatts = (int)Output * 20.0 / 255;
-  Temperatura =  SimPlanta(TempWatts);
+  Temperatura =  simPlanta(TempWatts);
   Input = map(Temperatura, 0, 1023, 0, 255);
 
  //Habilitar PID
@@ -88,11 +94,11 @@ void loop() {
   //Como el valor del potenciometro cambia se debe mapear el punto de operacion
   operacion = (map(analogRead(POT), 0, 1023, 0, 80));
 
-  switch(estado){
+  switch(Estado){
     case 0:
       float TempWatts = (int)Output * 20.0 / 255;
-      Temperatura =  SimPlanta(TempWatts);
-      estado = 1;
+      Temperatura =  simPlanta(TempWatts);
+      Estado = 1;
     
     case 1:
       Input = map(Temperatura, 0, 1023, 0, 255);
@@ -105,30 +111,31 @@ void loop() {
       else if (Temperatura < operacion){
         Temperatura = Temperatura + 1.5;
       }
-      if (abs(T-operacion) < 0.3){
+      if (abs(Temperatura-operacion) < 0.3){
         Temperatura = map(operacion, 0, 80, 0, 255);
-        estado = 0;
-      }      
+        Estado = 0;
+      }
+  }      
 
   //Condicional para encender los leds
   if (Temperatura >= 42){
-    digitalwrite(LED_AZUL, LOW);
-    digitalwrite(LED_VERDE, LOW);
-    digitalwrite(LED_ROJO, HIGH);
+    digitalWrite(LED_AZUL, LOW);
+    digitalWrite(LED_VERDE, LOW);
+    digitalWrite(LED_ROJO, HIGH);
   }
   else if(Temperatura <= 30){
-    digitalwrite(LED_AZUL, HIGH);
-    digitalwrite(LED_VERDE, LOW);
-    digitalwrite(LED_ROJO, LOW);    
+    digitalWrite(LED_AZUL, HIGH);
+    digitalWrite(LED_VERDE, LOW);
+    digitalWrite(LED_ROJO, LOW);    
   }
   else{
-    digitalwrite(LED_AZUL, LOW);
-    digitalwrite(LED_VERDE, HIGH);
-    digitalwrite(LED_ROJO, LOW);
+    digitalWrite(LED_AZUL, LOW);
+    digitalWrite(LED_VERDE, HIGH);
+    digitalWrite(LED_ROJO, LOW);
   }
 
   //Impresion en pantalla LCD
-  if (digitalRead(PULL1) == HIGH){
+  //if (digitalRead(PUL1) == HIGH){
     LCD.setCursor(0,0);
     LCD.print("Temp operacion: ");
     LCD.print(operacion);
@@ -139,15 +146,14 @@ void loop() {
     LCD.print("Señal de control: ");
     LCD.print(Output);
 
-  }
+ // }
   //Comunicacion serial
-  if (digitalRead(PULL2) == HIGH){
+  if (digitalRead(PUL2) == HIGH){
     Serial.print("Temperatura: ");
     Serial.print(Temperatura);
   }
   
 
-
-}
+  }
 
 
