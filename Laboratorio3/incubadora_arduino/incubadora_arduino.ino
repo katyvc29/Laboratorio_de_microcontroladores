@@ -14,8 +14,8 @@
 #define RST 7
 
 //Pulsadores y potenciometro
-#define PUL1 A5
-#define PUL2 A4
+#define PUL1 A5 //Impresion pantalla LCD
+#define PUL2 A4 //Comunicacion PC
 #define POT A0
 
 // Variable par manejo de la pantalla
@@ -56,13 +56,11 @@ float simPlanta(float Q) {
 void setup() {
   
   Serial.begin(9600); // Inicializa la comunicación serial
-  //Inicializacion de los pines
-  /*pinMode(RST, OUTPUT);
-  pinMode(CS, OUTPUT);
-  pinMode(DC, OUTPUT);
-  pinMode(DIN, OUTPUT);
-  pinMode(CLK, OUTPUT);*/
 
+  //Inicializacion de la pantalla LCD
+  LCD.begin(84, 48)
+
+  //Inicializacion de los pines
   pinMode(LED_AZUL, OUTPUT);
   pinMode(LED_VERDE, OUTPUT);
   pinMode(LED_ROJO, OUTPUT);
@@ -115,7 +113,7 @@ void loop() {
         estado = 0;
       }      
 
-  //Condicional para encender4 leds
+  //Condicional para encender los leds
   if (Temperatura >= 42){
     digitalwrite(LED_AZUL, LOW);
     digitalwrite(LED_VERDE, LOW);
@@ -131,7 +129,20 @@ void loop() {
     digitalwrite(LED_VERDE, HIGH);
     digitalwrite(LED_ROJO, LOW);
   }
-      
+
+  //Impresion en pantalla LCD
+  if (PULL1 == HIGH){
+    LCD.setCursor(0,0);
+    LCD.print("Temp operacion: ");
+    LCD.print(operacion);
+    LCD.setCursor(0,1);
+    LCD.print("Temp sensada: ");
+    LCD.print(Temperatura);
+    LCD.setCursor(0,3);
+    LCD.print("Señal de control: ")
+    LCD.print(Output)
+
+  }
   
   
 
