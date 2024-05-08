@@ -50,9 +50,6 @@ float simPlanta(float Q) {
   return T;
     }
 
-
-
-
 void setup() {
   
   Serial.begin(9600); // Inicializa la comunicación serial
@@ -131,7 +128,7 @@ void loop() {
   }
 
   //Impresion en pantalla LCD
-  if (PULL1 == HIGH){
+  if (digitalRead(PULL1) == HIGH){
     LCD.setCursor(0,0);
     LCD.print("Temp operacion: ");
     LCD.print(operacion);
@@ -144,7 +141,7 @@ void loop() {
 
   }
   //Comunicacion serial
-  if (PULL2 == HIGH){
+  if (digitalRead(PULL2) == HIGH){
     Serial.print("Temperatura: ");
     Serial.print(Temperatura);
   }
