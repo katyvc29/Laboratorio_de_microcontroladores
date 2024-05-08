@@ -103,7 +103,36 @@ void loop() {
       Input = map(Temperatura, 0, 1023, 0, 255);
       myPID.Compute();
       //analogic.write()
+
+      if(Temperatura > operacion){
+        Temperatura = Temperatura - 1.5;
+      }
+      else if (Temperatura < operacion){
+        Temperatura = Temperatura + 1.5;
+      }
+      if (abs(T-operacion) < 0.3){
+        Temperatura = map(operacion, 0, 80, 0, 255);
+        estado = 0;
+      }      
+
+  //Condicional para encender4 leds
+  if (Temperatura >= 42){
+    digitalwrite(LED_AZUL, LOW);
+    digitalwrite(LED_VERDE, LOW);
+    digitalwrite(LED_ROJO, HIGH);
   }
+  else if(Temperatura <= 30){
+    digitalwrite(LED_AZUL, HIGH);
+    digitalwrite(LED_VERDE, LOW);
+    digitalwrite(LED_ROJO, LOW);    
+  }
+  else{
+    digitalwrite(LED_AZUL, LOW);
+    digitalwrite(LED_VERDE, HIGH);
+    digitalwrite(LED_ROJO, LOW);
+  }
+      
+  
   
 
 
