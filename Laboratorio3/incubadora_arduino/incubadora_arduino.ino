@@ -71,6 +71,9 @@ void setup() {
   pinMode(PUL2, INPUT);
   pinMode(POT, INPUT);
 
+  //Estado para el lazo cerrado
+    Estado = 0;
+
   //Control PID
   //Inicializar variables
   //Se mapea el punto de operacion del potenciometro
@@ -87,7 +90,22 @@ void setup() {
 
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  //Como el valor del potenciometro cambia se debe mapear el punto de operacion
+  operacion = (map(analogRead(POT), 0, 1023, 0, 80));
+
+  switch(estado){
+    case 0:
+      float TempWatts = (int)Output * 20.0 / 255;
+      Temperatura =  SimPlanta(TempWatts);
+      estado = 1;
+    
+    case 1:
+      Input = map(Temperatura, 0, 1023, 0, 255);
+      myPID.Compute();
+      //analogic.write()
+  }
+  
+
 
 }
 
