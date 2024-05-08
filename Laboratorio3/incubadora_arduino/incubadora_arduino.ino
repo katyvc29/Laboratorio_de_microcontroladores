@@ -2,27 +2,27 @@
 #include <PCD8544.h>
 
 //Leds azul, verde y rojo en ese orden
-#define LED_AZUL 8
-#define LED_VERDE 12
-#define LED_ROJO 13
+#define LED_AZUL 8;
+#define LED_VERDE 12;
+#define LED_ROJO 13;
 
 // Conexiones del PCD8544
-#define CLK 3
-#define DIN 4
-#define DC 5
-#define CS 6
-#define RST 7
+#define CLK 3;
+#define DIN 4;
+#define DC 5;
+#define CS 6;
+#define RST 7;
 
 //Pulsadores y potenciometro
-#define PUL1 A5 //Impresion pantalla LCD
-#define PUL2 A4 //Comunicacion PC
-#define POT A0
+#define PUL1 A5; //Impresion pantalla LCD
+#define PUL2 A4; //Comunicacion PC
+#define POT A0;
 
 // Variable par manejo de la pantalla
 PCD8544 LCD;
 
 //Variables de control para el PID
-double Setpoint , Input , Output;
+double Setpoint, Input, Output;
 
 //Variable del PID
 PID myPID(&Input, &Output, &Setpoint, 2, 5, 1 , DIRECT); // ganancias escogidas arbitrariamente
@@ -58,7 +58,7 @@ void setup() {
   Serial.begin(9600); // Inicializa la comunicación serial
 
   //Inicializacion de la pantalla LCD
-  LCD.begin(84, 48)
+  LCD.begin(84, 48);
 
   //Inicializacion de los pines
   pinMode(LED_AZUL, OUTPUT);
@@ -139,11 +139,15 @@ void loop() {
     LCD.print("Temp sensada: ");
     LCD.print(Temperatura);
     LCD.setCursor(0,3);
-    LCD.print("Señal de control: ")
-    LCD.print(Output)
+    LCD.print("Señal de control: ");
+    LCD.print(Output);
 
   }
-  
+  //Comunicacion serial
+  if (PULL2 == HIGH){
+    Serial.print("Temperatura: ");
+    Serial.print(Temperatura);
+  }
   
 
 
