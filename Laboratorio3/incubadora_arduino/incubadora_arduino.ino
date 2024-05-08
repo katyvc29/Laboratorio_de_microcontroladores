@@ -2,9 +2,9 @@
 #include <PCD8544.h>
 
 //Leds azul, verde y rojo en ese orden
-#define LED1 8
-#define LED2 12
-#define LED3 13
+#define LED_AZUL 8
+#define LED_VERDE 12
+#define LED_ROJO 13
 
 // Conexiones del PCD8544
 #define CLK 3
@@ -18,36 +18,17 @@
 #define PUL2 A4
 #define POT A0
 
-void setup() {
-  
-  Serial.begin(9600); // Inicializa la comunicación serial
-  //Inicializacion de los pines
-  pinMode(RST, OUTPUT);
-  pinMode(CS, OUTPUT);
-  pinMode(DC, OUTPUT);
-  pinMode(DIN, OUTPUT);
-  pinMode(CLK, OUTPUT);
+// Variable par manejo de la pantalla
+PCD8544 LCD;
 
-  pinMode(LED1, OUTPUT);
-  pinMode(LED2, OUTPUT);
-  pinMode(LED3, OUTPUT);
+//Variables de control para el PID
+double Setpoint , Input , Output;
 
-  pinMode(PUL1, INPUT);
-  pinMode(PUL2, INPUT);
-  pinMode(POT, INPUT);
-}
+//Variable del PID
+PID myPID(&Input, &Output, &Setpoint, 2, 5, 1 , DIRECT); // ganancias escogidas arbitrariamente
 
-void loop() {
-  // put your main code here, to run repeatedly:
 
-}
-
- 
-//Esta funcion simula la planta/proceso
-//@param Q: Entrada de calor en Watts (o J/s). Para convertir la salida en temperatura del control PID(Output) puede utilizar:
-// float TempWatts = (int)Output ∗ 20.0 / 255;
-// @return T: Temperatura de salida en la planta
-
+//Funcion de la planta para simular lazo cerrado
 float simPlanta(float Q) {
   //simula un bloque de aluminio de 1x1x2cm con un calentador y con enfreamiento pasivo
   float C = 237; // W/mK coeficiente de conductividad termica para el Aluminio
@@ -68,3 +49,46 @@ float simPlanta(float Q) {
 
   return T;
     }
+
+
+
+
+void setup() {
+  
+  Serial.begin(9600); // Inicializa la comunicación serial
+  //Inicializacion de los pines
+  /*pinMode(RST, OUTPUT);
+  pinMode(CS, OUTPUT);
+  pinMode(DC, OUTPUT);
+  pinMode(DIN, OUTPUT);
+  pinMode(CLK, OUTPUT);*/
+
+  pinMode(LED_AZUL, OUTPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_ROJO, OUTPUT);
+
+  pinMode(PUL1, INPUT);
+  pinMode(PUL2, INPUT);
+  pinMode(POT, INPUT);
+
+  //Control PID
+  //Inicializar variables
+  //Se mapea el punto de operacion del potenciometro
+  operacion = (map(analogRead(POT), 0, 1023, 0, 80));
+  SetPoint = map(operacion, 0, 80, 0, 255);
+  float TempWatts = (int)Output * 20.0 / 255;
+  Temperatura =  SimPlanta(TempWatts);
+  Input = map(Temperatura, 0, 1023, 0, 255);
+
+ //Habilitar PID
+  myPID.SetMode(AUTOMATIC);
+
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+
+
