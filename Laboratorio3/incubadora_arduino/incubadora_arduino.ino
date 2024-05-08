@@ -6,12 +6,12 @@
 #define LED_VERDE 12
 #define LED_ROJO 13
 
-// Conexiones del PCD8544
+/* Conexiones del PCD8544
 #define CLK 3
 #define DIN 4
 #define DC 5
 #define CS 6
-#define RST 7
+#define RST 7*/
 
 //Pulsadores y potenciometro
 #define PUL1 A5 //Impresion pantalla LCD
@@ -62,6 +62,7 @@ void setup() {
 
   //Inicializacion de la pantalla LCD
   LCD.begin(84, 48);
+  LCD.setContrast(60);
 
   //Inicializacion de los pines
   pinMode(LED_AZUL, OUTPUT);
@@ -137,13 +138,13 @@ void loop() {
   //Impresion en pantalla LCD
   //if (digitalRead(PUL1) == HIGH){
     LCD.setCursor(0,0);
-    LCD.print("Temp operacion: ");
+    LCD.print("T.op: ");
     LCD.print(operacion);
     LCD.setCursor(0,1);
-    LCD.print("Temp sensada: ");
+    LCD.print("T.sen: ");
     LCD.print(Temperatura);
     LCD.setCursor(0,3);
-    LCD.print("Señal de control: ");
+    LCD.print("S control: ");
     LCD.print(Output);
 
  // }
