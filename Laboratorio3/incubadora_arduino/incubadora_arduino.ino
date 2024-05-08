@@ -136,7 +136,7 @@ void loop() {
   }
 
   //Impresion en pantalla LCD
-  //if (digitalRead(PUL1) == HIGH){
+  if (digitalRead(PUL1) == HIGH){
     LCD.setCursor(0,0);
     LCD.print("T.op: ");
     LCD.print(operacion);
@@ -147,7 +147,7 @@ void loop() {
     LCD.print("S control: ");
     LCD.print(Output);
 
- // }
+  }
   //Comunicacion serial
   if (digitalRead(PUL2) == HIGH){
     Serial.print("Temperatura: ");
