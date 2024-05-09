@@ -88,7 +88,6 @@ void setup() {
 void loop() {
   //Como el valor del potenciometro cambia se debe mapear el punto de operacion
   operacion = (map(analogRead(POT), 0, 1023, 0, 80));
-
   switch(Estado){
     case 0:
       float TempWatts = (int)Output * 20.0 / 255;
@@ -97,7 +96,7 @@ void loop() {
       break;
     
     case 1:
-      Input = map(Temperatura, 0, 1023, 0, 255);
+      Input = map(analogRead(POT), 0, 1023, 0, 80); //map(Temperatura, 0, 1023, 0, 255);
       myPID.Compute();
 
       if(Temperatura > operacion){
