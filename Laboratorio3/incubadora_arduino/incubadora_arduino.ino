@@ -18,7 +18,7 @@ PCD8544 LCD;
 double SetPoint, Input, Output;
 
 //Variable del PID
-PID myPID(&Input, &Output, &SetPoint, 0.2, 0.1, 0.1, DIRECT); // ganancias escogidas arbitrariamente
+PID myPID(&Input, &Output, &SetPoint, 2, 5, 1, DIRECT); // ganancias escogidas arbitrariamente
 
 
 //Funcion de la planta para simular lazo cerrado
@@ -68,7 +68,7 @@ void setup() {
   pinMode(POT, INPUT);
 
   //Estado para el lazo cerrado
-    Estado = 0;
+  Estado = 0;
 
   //Control PID
   //Inicializar variables
@@ -86,7 +86,8 @@ void setup() {
 
 void loop() {
   //Como el valor del potenciometro cambia se debe mapear el punto de operacion
-  operacion = (map(analogRead(POT), 0, 1023, 0, 80));
+  operacion = map(analogRead(POT), 0, 1023, 0, 80);
+  
   switch(Estado){
     case 0:
       float TempWatts = (int)Output * 20.0 / 255;
@@ -95,7 +96,7 @@ void loop() {
       break;
     
     case 1:
-      Input = map(analogRead(POT), 0, 1023, 0, 80); //map(Temperatura, 0, 1023, 0, 255);
+      Input = map(Temperatura, 0, 1023, 0, 255);
       myPID.Compute();
 
       if(Temperatura > operacion){
