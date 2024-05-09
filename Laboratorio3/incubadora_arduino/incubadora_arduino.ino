@@ -81,7 +81,6 @@ void setup() {
 
  //Habilitar PID
   myPID.SetMode(AUTOMATIC);
-
 }
 
 
@@ -105,6 +104,7 @@ void loop() {
       else if (Temperatura < operacion){
         Temperatura = Temperatura + 1.5;
       }
+      //margen de error
       if (abs(Temperatura-operacion) < 0.3){
         Temperatura = map(operacion, 0, 80, 0, 255);
         Estado = 0;
