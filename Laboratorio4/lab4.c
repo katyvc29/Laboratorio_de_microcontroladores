@@ -25,6 +25,21 @@
 #include <libopencm3/stm32/spi.h>
 
 
+//Definicion de variables relacionadas al giroscopio
+#define GYR_RNW        (1 << 7) //Permite que se escriba cuando esta en 0
+#define GYR_MNS        (1 << 6) //Permite lecturas multiples cuando esta en 1
+#define GYR_WHO_I_AM   0x0F //Identifica el dispositivo
+#define GYR_OUT_TEMP   0x26 //Registra la temperatura de salida
+#define GYR_STATUS_REG 0x27 //Registra el estado
+
+
+
+
+
+
+
+
+
 //Funcion principal del programa 
 int main(void) {
 	float bateria_lvl;
