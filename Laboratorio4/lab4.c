@@ -50,6 +50,10 @@
 #define GYR_OUT_Z_L 0X2C
 #define GYR_OUT_Z_H 0X2D
 
+//Sensibielidad del giroscopio
+#define L3GD20_SENSITIVITY_250DPS (0.00875F)
+
+
 
 //Funcion principal del programa 
 int main(void) {
