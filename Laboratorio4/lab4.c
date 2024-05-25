@@ -15,3 +15,15 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/spi.h>
+
+
+//Funcion principal del programa 
+int main(void) {
+	float bateria_lvl;
+	//Bucle principal del sistema
+	while(1){
+	
+	
+	}
+
+}
