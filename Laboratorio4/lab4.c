@@ -73,6 +73,17 @@ static void spi_setup(void);
 static void usart_setup(void);
 uint8_t spi_communications(uint8_t command);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int print_decimal(int num); 	// basada en lcd-spi.c
+//static void adc_setup(void); 	// basada en adc-dac-printf
+static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
     gpio_clear(GPIOC, GPIO1) //Pome en bajo el chip selectec para comenzar la transaccion SPI
@@ -147,6 +158,60 @@ uint8_t spi_communications(uint8_t command){
 
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Funcion para imprimir un entero como un numero decimal (tomada como base del archivo lcd-spi.c)
+int print_decimal(int num){
+	int	ndx = 0;
+	char	buf[10]; 		//Se cambia a 12 para tener en cuenta el signo
+	int	len = 0;			// Guarda la longitud de la cadena
+	char	is_signed = 0;	// Va a indicar si el numero es negativo
+
+	if (num < 0) {
+		is_signed++;
+		num = 0 - num;
+	}
+	buf[ndx++] = '\000';
+	do {
+		buf[ndx++] = (num % 10) + '0';
+		num = num / 10;
+	} while (num != 0);
+	ndx--;
+	if (is_signed != 0) {
+		console_putc('-');
+		len++;
+	}
+	while (buf[ndx] != '\000') {
+		console_putc(buf[ndx--]);
+		len++;
+	}
+	return len; /* number of characters printed */
+}
+
+// funcion que configura el conv analogico-digital para leer la bateria(basada en la funcion de archivo adc-dac-printf)
+static void adc_setup(void){
+	// Configuracion del pin  en modo analogico para la bateria
+    gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3); 	// Establece en analogico y sin pull-up ni pull-down
+    adc_power_off(ADC1);   												//  Apaga ADC1                    
+    adc_disable_scan_mode(ADC1);										// Desactivan el modo escaneo                   
+    adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_3CYC);		// Establece el tiempo de muestreo
+    adc_power_on(ADC1);                               					// Enciende ADC1
+}
+
+// funcion que configura el conv analogico-digital para leer la bateria(basada en la funcion de archivo adc-dac-printf)
+static uint16_t read_adc_naiive(uint8_t channel){
+    uint8_t channel_array[16];
+    channel_array[0] = channel;                       // Establece el canal a leer en el array
+    adc_set_regular_sequence(ADC1, 1, channel_array); // Configura la secuencia de conversión regular del ADC
+    adc_start_conversion_regular(ADC1);               // Inicia la conversión
+    while (!adc_eoc(ADC1));                           // Espera hasta que la conversión haya finalizado
+    uint16_t reg16 = adc_read_regular(ADC1);          // Lee el valor convertido
+    return reg16;                                     // Devuelve el valor
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //Funcion principal del programa 
