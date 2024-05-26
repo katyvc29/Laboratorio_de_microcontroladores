@@ -69,6 +69,7 @@ typedef struct Giroscopio {
 
 //Declaracion de funciones
 void spi_transaction(uint16_t reg, uint16_t val);
+static void spi_setup(void);
 
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
@@ -80,8 +81,38 @@ void spi_transaction(uint16_t reg, uint16_t val){
     gpio_set(GPIOC, GPIO1);    // Sube el chip selected para finalizar la transacción
 }
 
+//Función para configurar el módulo SPI5 y GPIOs relacionados, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
+static void spi_setup(void){
+    rcc_periph_clock_enable(RCC_SPI5); //Habilita el reloj para SPI5
+    rcc_periph_clock_enable(RCC_GPIOC); //Habilita el reloj para el puerto GPIOC
+    rcc_periph_clock_enable(RCC_GPIOF); //Habilita el reloj para el puerto GPIOF
+
+    //Configura el pin GPIO1 de GPIOC como salida
+    gpio_mode_setup(GPIOC, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO1); //Establece modo de operacion/ NO pull-up ni pull-down / número específico del pin
+    gpio_set(GPIOC, GPIO1); //ambos en alto
+
+    //Configura los pines GPIO7, GPIO8 y GPIO9 de GPIOF para funciones alternas 
+    gpio_mode_setup(GPIOF, GPIO_MODE_AF, GPIO_PUPD_NONE,GPIO7 | GPIO8 | GPIO9);   
+    gpio_set_af(GPIOF, GPIO_AF5, GPIO7 | GPIO8 | GPIO9);
+    
+    //Configuración de SPI5
+    spi_set_master_mode(SPI5);   //Establece SPI5 en modo maestro
+    spi_set_baudrate_prescaler(SPI5, SPI_CR1_BR_FPCLK_DIV_64);  //Configura la velocidad de baudios de SPI5
+    spi_set_clock_polarity_0(SPI5); //Configura la polaridad del reloj a 0
+    spi_set_clock_phase_0(SPI5); //Configura la fase del reloj a 0
+    spi_set_full_duplex_mode(SPI5); //Establece SPI5 en modo full duplex
+    spi_set_unidirectional_mode(SPI5); //Establece SPI5 en modo unidireccional
+    spi_enable_software_slave_management(SPI5); //Habilita la gestión de esclavo por software
+    spi_send_msb_first(SPI5); //Establece la transmisión de bits empezando por el más significativo
+    spi_set_nss_high(SPI5); //Establece el pin NSS en alto
+    SPI_I2SCFGR(SPI5) &= ~SPI_I2SCFGR_I2SMOD; //Configuración adicional para SPI5
+    spi_enable(SPI5); //Habilita SPI5
 
 
+    //Se llama la funcion que realiza las transacciones SPI para configurar el giroscopio
+    spi_transaction(GYR_CTRL_REG1, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN | GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN | (3 << GYR_CTRL_REG1_BW_SHIFT));
+    spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
+}
 
 
 //Funcion principal del programa 
