@@ -7,24 +7,32 @@
 #include <unistd.h>
 
 //Librerias a utilizar 
-#include "usart.h"
-#include "spi.h"
-#include "gpio.h"
-#include "dac.h"
-#include "adc.h"
-#include "rcc.h"
+//#include "usart.h"
+//#include "spi.h"
+//#include "gpio.h"
+//#include "dac.h"
+//#include "adc.h"
+//#include "rcc.h"
+
+// Archivos del codigo del ejemplo lcd-serial
+#include "clock.h"
+#include "console.h"
 #include "gfx.h"
 #include "lcd-spi.h"
 #include "sdram.h"
-#include "console.h"
-#include "clock.h"
+
+
 
 //Librerias del micro
-#include <libopencm3/stm32/rcc.h>
-#include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/spi.h>
+#include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/rcc.h>
+#include <libopencm3/stm32/dac.h>
+#include <libopencm3/stm32/adc.h>
 
 
+// Definiciones de macros  para interacturar por medio spi sacadas del archivo spi.c
 //Definicion de variables relacionadas al giroscopio
 #define GYR_RNW        (1 << 7) //Permite que se escriba cuando esta en 0
 #define GYR_MNS        (1 << 6) //Permite varias lecturas cuando esta en 1
@@ -39,7 +47,7 @@
 #define GYR_CTRL_REG1_YEN       (1 << 0) //Habilita el eje Y
 #define GYR_CTRL_REG1_ZEN       (1 << 2) //Habilita el eje Z
 #define GYR_CTRL_REG1_BW_SHIFTH 4 //Cambios en el ancho de banda
-#define GYR_CTRL_REG4           0x23 //Configura el registro de control 4
+#define GYR_CTRL_REG4           0x23 //Configura el registro de control 4 **escala de medicion
 #define GYR_CTRL_REG4_FS_SHIFTH 4 //Cambios en la escala 
 
 //Direcciones de los registros de datos del girocospio
@@ -51,7 +59,13 @@
 #define GYR_OUT_Z_H 0X2D
 
 //Sensibielidad del giroscopio
-#define L3GD20_SENSITIVITY_250DPS (0.00875F)
+#define SENSITIVITY_250DPS (0.00875F) //@
+
+typedef struct Giroscopio {
+  int16_t x;
+  int16_t y;
+  int16_t z;
+} giroscopio;
 
 
 
