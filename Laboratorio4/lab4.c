@@ -67,6 +67,7 @@ typedef struct Giroscopio {
   int16_t z;
 } giroscopio;
 
+//Declaracion de funciones
 void spi_transaction(uint16_t reg, uint16_t val);
 
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
@@ -77,10 +78,6 @@ void spi_transaction(uint16_t reg, uint16_t val){
     spi_send(SPI5, val);       // Envia el valor al giroscopio
     spi_read(SPI5);            // Lee la respuesta del giroscopio
     gpio_set(GPIOC, GPIO1);    // Sube el chip selected para finalizar la transacción
-
-
-
-
 }
 
 
