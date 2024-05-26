@@ -71,6 +71,7 @@ typedef struct Giroscopio {
 void spi_transaction(uint16_t reg, uint16_t val);
 static void spi_setup(void);
 static void usart_setup(void);
+uint8_t spi_communications(uint8_t command);
 
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
@@ -132,6 +133,21 @@ static void usart_setup(void){
     //Habilita USART1
     usart_enable(USART1);
 }
+
+//Funcion para realizar una configuracion SPI con el giroscopio y obtener una respuesta
+uint8_t spi_communications(uint8_t command){
+     gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
+    spi_send(SPI5, command);// Envia el comando por SPI5
+    spi_read(SPI5); //Lee una respuesta desde SPI5
+    spi_send(SPI5, 0);//Envia un byte en 0 por SPI5
+    uint8_t result = spi_read(SPI5); //Lee el resultado desde SPI5
+    gpio_set(GPIOC, GPIO1); //Activa el pin GPIO1 de GPIOC (termina la comunicacion con el dispositivo)
+    return result; // Devuelve el resultado leido
+
+
+}
+
+
 
 //Funcion principal del programa 
 int main(void) {
