@@ -70,6 +70,7 @@ typedef struct Giroscopio {
 //Declaracion de funciones
 void spi_transaction(uint16_t reg, uint16_t val);
 static void spi_setup(void);
+static void usart_setup(void);
 
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
@@ -114,6 +115,23 @@ static void spi_setup(void){
     spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
 }
 
+//Funcion que configura el USART1 y los Gpios necesarios, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
+static void usart_setup(void){
+    //Configura el pin GPIO9 de GPIOA para transmitir en USART1
+    gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);	
+    gpio_set_af(GPIOA, GPIO_AF7, GPIO9);
+	
+    // Configuración de USART1
+    usart_set_baudrate(USART1, 115200); //Establece la velocidad de baudios en 115200
+    usart_set_databits(USART1, 8); //Establece 8 bits de datos
+    usart_set_stopbits(USART1, USART_STOPBITS_1); //Establece 1 bit de parada
+    usart_set_mode(USART1, USART_MODE_TX); //Establece USART1 en modo de transmisión
+    usart_set_parity(USART1, USART_PARITY_NONE); //Sin paridad
+    usart_set_flow_control(USART1, USART_FLOWCONTROL_NONE); //Sin control de flujo
+
+    //Habilita USART1
+    usart_enable(USART1);
+}
 
 //Funcion principal del programa 
 int main(void) {
