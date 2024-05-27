@@ -199,7 +199,7 @@ giroscopio leer_ejes_xyz(void) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
+//Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c 
 static void gpio_setup(void){
     rcc_periph_clock_enable(RCC_GPIOG); //Habilita el reloj para el puerto GPIOG
     rcc_periph_clock_enable(RCC_GPIOA); //Habilita el reloj para el puerto GPIOA
