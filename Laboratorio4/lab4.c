@@ -371,11 +371,33 @@ void delay(void) {
 
 //Funcion principal del programa 
 int main(void) {
-	float bateria_lvl;
+    giroscopio lectura;
+    float bateria_nivel;
+    uint16_t input_adc0;
+    bool enviar = false;
+
+	inicializacion();
+
+
 	//Bucle principal del sistema
 	while(1){
-	
+		lectura = read_xyz;
+		gpio_set(GPIOC, GPIO1);
+		input_adc0 = read_adc_naiive(3);
+		bateria_nivel = (input_adc0 * 9.0f) / 4095.0f;
+
+		display_datos(lectura, bateria_lvl, enviar);
+		if (enviar) envio_datos(lectura, bateria_lvl);
+
+		leds(bateria_nivel, enviar);  
+
+		if (gpio_get(GPIOA, GPIO0)) {  
+            enviar = !enviar;
+        }
+
+		delay(); 
 	
 	}
+	return 0; 
 
 }
