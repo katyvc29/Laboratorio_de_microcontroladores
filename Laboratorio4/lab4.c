@@ -77,7 +77,11 @@ uint8_t spi_communications(uint8_t command);
 
 int print_decimal(int num); 	// basada en lcd-spi.c
 //static void adc_setup(void); 	// basada en adc-dac-printf
-static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
+//static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
+void leds(float bateria_nivel);
+void envio_datos(giroscopio lectura, float bateria_nivel);
+void display_datos(giroscopio lectura, float bateria_nivel, bool enviar);
+void inicializacion(void); 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,6 +212,108 @@ static uint16_t read_adc_naiive(uint8_t channel){
     while (!adc_eoc(ADC1));                           // Espera hasta que la conversión haya finalizado
     uint16_t reg16 = adc_read_regular(ADC1);          // Lee el valor convertido
     return reg16;                                     // Devuelve el valor
+}
+
+
+// funcion para los LED que indican bateria baja y deformacion mayor a 5 grados
+void leds(float bateria_nivel) {
+
+	// agregar lo de 5 grados 
+
+    if (bateria_nivel < 7) {
+        gpio_toggle(GPIOG, GPIO14);                   
+    } else {
+        gpio_clear(GPIOG, GPIO14);                   
+    }
+}
+
+// 
+void envio_datos(giroscopio lectura, float bateria_nivel) {
+    print_decimal(lectura.x);                         // Imprime X del giroscopio
+    console_puts("\t");                               
+    print_decimal(lectura.y);                         // Imprime Y del giroscopio
+    console_puts("\t");                               
+    print_decimal(lectura.z);                         // Imprime Z del giroscopio
+    console_puts("\t");                               
+    print_decimal(bateria_nivel);                     // Imprime la tension de la batería
+    console_puts("\n");                              
+
+    leds(bateria_nivel);                   	 // llama a la funcion que controla los LEDs
+}	 
+
+void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
+    char display_str[50];
+    
+    // Pone la pantalla en blanco y configura tamano del texto
+    gfx_fillScreen(LCD_WHITE);
+    gfx_setTextSize(2);
+
+    // Bateria en color negro
+    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
+    sprintf(display_str, "Nivel de bateria: \t: %.2f V", bateria_nivel);
+    gfx_setCursor(5, 30);
+    gfx_puts(display_str);
+
+
+	// Normalizacion de los valores de la bateria 
+    float battery_percentage = (bateria_nivel - 2.0) / (8.5 - 2.0); 
+
+
+    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
+    gfx_setCursor(23, 90);
+    gfx_puts("Giroscopio valores: ");		
+
+	// Imprime en valor de x del giroscopio en color magenta
+    gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
+    sprintf(display_str, "X: %d", lectura.x);
+    gfx_setCursor(20, 130);
+    gfx_puts(display_str);
+
+	// Imprime en valor de y del giroscopio en color azul
+    gfx_setTextColor(LCD_BLUE , LCD_WHITE);
+    sprintf(display_str, "Y: %d", lectura.y);
+    gfx_setCursor(20, 170);
+    gfx_puts(display_str);
+
+	// Imprime en valor de z del giroscopio en color
+    gfx_setTextColor(LCD_YELLOW, LCD_WHITE);
+    sprintf(display_str, "Z: %d", lectura.z);
+    gfx_setCursor(20, 210);
+    gfx_puts(display_str);
+
+	// Muestra el estado de la comunicacion
+    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
+    gfx_setCursor(3, 250);
+    gfx_puts("Comunicacion: ");
+    gfx_setCursor(205, 250);
+    gfx_puts(enviar ? "On" : "Off");
+    
+	// llama la funcion que controla los LEDs (nivel de bateria y cuando hay mas de 5 grados de deformacion)
+    handle_leds(bateria_nivel);
+
+    lcd_show_frame();
+}
+
+// Funcion que inicializa el sistema
+void inicializacion(void) {
+    console_setup(115200);
+    clock_setup();
+    rcc_periph_clock_enable(RCC_USART1);
+    rcc_periph_clock_enable(RCC_ADC1);
+    gpio_setup();
+    adc_setup();
+    sdram_init();
+    usart_setup();
+    spi_setup();
+    lcd_spi_init();
+    gfx_init(lcd_draw_pixel, 240, 320);
+}
+
+// funcion de retardo sacada del archivo de miniblink.c
+void delay(void) {
+    for (int i = 0; i < 80000; i++) {
+        __asm__("nop");
+    }
 }
 
 
