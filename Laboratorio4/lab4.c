@@ -76,6 +76,7 @@ static void spi_setup(void);
 static void usart_setup(void);
 uint8_t spi_communications(uint8_t command);
 uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
+giroscopio leer_ejes_xyz(void);
 int print_decimal(int num); 	// basada en lcd-spi.c
 //static void adc_setup(void); 	// basada en adc-dac-printf
 //static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
@@ -176,6 +177,24 @@ uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
     result = spi_communication(lsb_command); //Lee el byte menos significativo
     result |= spi_communication(msb_command) << 8; //Lee el byte más significativo y lo combina con el LSB
     return result; //Retorna el valor obtenido
+}
+
+///////////////////////////////////////////////////////////////////////////
+//Funcion para leer los valores de los ejes X, Y, Z del giroscopio
+giroscopio leer_ejes_xyz(void) {
+	giroscopio medicion; //Crea una estructura para el giroscopio 
+
+    spi_communication(GYR_WHO_AM_I | 0x80); //Lee el registro WHO_AM_I del giroscopio
+    spi_communication(GYR_STATUS_REG | GYR_RNW); //Lee el registro STATUS_REG del giroscopio
+    spi_communication(GYR_OUT_TEMP | GYR_RNW);  //Lee el registro OUT_TEMP del giroscopio
+
+    //Obtiene los valores de los ejes y los escala segun la sensibilidad
+    medicion.x = leer_eje(GYR_OUT_X_L | GYR_RNW, GYR_OUT_X_H | GYR_RNW) * L3GD20_SENSITIVITY_250DPS;
+    medicion.y = leer_eje(GYR_OUT_Y_L | GYR_RNW, GYR_OUT_Y_H | GYR_RNW) * SENSITIVITY_250DPS;
+    medicion.z = leer_eje(GYR_OUT_Z_L | GYR_RNW, GYR_OUT_Z_H | GYR_RNW) * SENSITIVITY_250DPS;
+
+    return medicion; //Retorna la lectura con los valores de los 3 ejes
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
