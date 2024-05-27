@@ -77,6 +77,7 @@ static void usart_setup(void);
 uint8_t spi_communications(uint8_t command);
 uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
 giroscopio leer_ejes_xyz(void);
+static void gpio_setup(void);
 int print_decimal(int num); 	// basada en lcd-spi.c
 //static void adc_setup(void); 	// basada en adc-dac-printf
 //static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
@@ -198,7 +199,21 @@ giroscopio leer_ejes_xyz(void) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
+static void gpio_setup(void){
+    rcc_periph_clock_enable(RCC_GPIOG); //Habilita el reloj para el puerto GPIOG
+    rcc_periph_clock_enable(RCC_GPIOA); //Habilita el reloj para el puerto GPIOA
 
+    //Configura el pin GPIO0 de GPIOA como entrada
+    gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO0);
+    //Configura los pines GPIO13 de GPIOG y GPIO14 de GPIOG como salida
+    gpio_mode_setup(GPIOG, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO13);
+    gpio_mode_setup(GPIOG, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO14);
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////
 // Funcion para imprimir un entero como un numero decimal (tomada como base del archivo lcd-spi.c)
 int print_decimal(int num){
 	int	ndx = 0;
