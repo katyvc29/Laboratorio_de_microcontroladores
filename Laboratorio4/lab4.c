@@ -67,14 +67,15 @@ typedef struct Giroscopio {
   int16_t z;
 } giroscopio;
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Declaracion de funciones
 void spi_transaction(uint16_t reg, uint16_t val);
 static void spi_setup(void);
 static void usart_setup(void);
 uint8_t spi_communications(uint8_t command);
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
 int print_decimal(int num); 	// basada en lcd-spi.c
 //static void adc_setup(void); 	// basada en adc-dac-printf
 //static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
@@ -97,6 +98,9 @@ void spi_transaction(uint16_t reg, uint16_t val){
     spi_read(SPI5);            // Lee la respuesta del giroscopio
     gpio_set(GPIOC, GPIO1);    // Sube el chip selected para finalizar la transacción
 }
+
+///////////////////////////////////////////////////////////////////////////
+
 
 //Función para configurar el módulo SPI5 y GPIOs relacionados, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
 static void spi_setup(void){
@@ -131,6 +135,8 @@ static void spi_setup(void){
     spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
 }
 
+///////////////////////////////////////////////////////////////////////////
+
 //Funcion que configura el USART1 y los Gpios necesarios, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
 static void usart_setup(void){
     //Configura el pin GPIO9 de GPIOA para transmitir en USART1
@@ -149,6 +155,8 @@ static void usart_setup(void){
     usart_enable(USART1);
 }
 
+/////////////////////////////////////////////////////////////////////////
+
 //Funcion para realizar una configuracion SPI con el giroscopio y obtener una respuesta
 uint8_t spi_communications(uint8_t command){
      gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
@@ -161,7 +169,14 @@ uint8_t spi_communications(uint8_t command){
 
 
 }
-
+///////////////////////////////////////////////////////////////////////////
+//Funcion que se encarga de leer un eje del giroscopio usando los bits LSB Y MSB
+uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
+    int16_t result; //Crea una variable para guardar el resultado
+    result = spi_communication(lsb_command); //Lee el byte menos significativo
+    result |= spi_communication(msb_command) << 8; //Lee el byte más significativo y lo combina con el LSB
+    return result; //Retorna el valor obtenido
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
