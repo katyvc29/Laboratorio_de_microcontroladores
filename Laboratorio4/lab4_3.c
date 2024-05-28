@@ -74,10 +74,9 @@ typedef struct Giroscopio {
 void spi_transaction(uint16_t reg, uint16_t val);
 static void spi_setup(void);
 static void usart_setup(void);
-uint8_t spi_communications(uint8_t command);
+uint8_t spi_communication(uint8_t command);
 uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
 giroscopio leer_ejes_xyz(void);
-static void gpio_setup(void);
 int print_decimal(int num); 	// basada en lcd-spi.c
 //static void adc_setup(void); 	// basada en adc-dac-printf
 //static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
@@ -85,6 +84,7 @@ void leds(float bateria_nivel);
 void envio_datos(giroscopio lectura, float bateria_nivel);
 void display_datos(giroscopio lectura, float bateria_nivel, bool enviar);
 void inicializacion(void); 
+void delay(void);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ void inicializacion(void);
 
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
-    gpio_clear(GPIOC, GPIO1) //Pome en bajo el chip selectec para comenzar la transaccion SPI
+    gpio_clear(GPIOC, GPIO1); //Pome en bajo el chip selectec para comenzar la transaccion SPI
     spi_send(SPI5, reg);       // Envia el registro al giroscopio
     spi_read(SPI5);            // Lee la respuesta del giroscopio
     spi_send(SPI5, val);       // Envia el valor al giroscopio
@@ -160,7 +160,7 @@ static void usart_setup(void){
 /////////////////////////////////////////////////////////////////////////
 
 //Funcion para realizar una configuracion SPI con el giroscopio y obtener una respuesta
-uint8_t spi_communications(uint8_t command){
+uint8_t spi_communication(uint8_t command){
      gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
     spi_send(SPI5, command);// Envia el comando por SPI5
     spi_read(SPI5); //Lee una respuesta desde SPI5
@@ -198,8 +198,7 @@ giroscopio leer_ejes_xyz(void) {
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c 
+//Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
 static void gpio_setup(void){
     rcc_periph_clock_enable(RCC_GPIOG); //Habilita el reloj para el puerto GPIOG
     rcc_periph_clock_enable(RCC_GPIOA); //Habilita el reloj para el puerto GPIOA
@@ -212,8 +211,8 @@ static void gpio_setup(void){
 
 }
 
-
-///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 // Funcion para imprimir un entero como un numero decimal (tomada como base del archivo lcd-spi.c)
 int print_decimal(int num){
 	int	ndx = 0;
@@ -239,7 +238,43 @@ int print_decimal(int num){
 		console_putc(buf[ndx--]);
 		len++;
 	}
-	return len; /* number of characters printed */
+	return len; //number of characters printed 
+}*/
+
+int print_decimal(int num)
+{
+    char buf[12]; 
+    char *p = buf + sizeof(buf) - 1; 
+    int len = 0;
+    bool is_negative = false;
+
+    if (num == 0) { 
+        console_putc('0');
+        return 1;
+    }
+
+    if (num < 0) {
+        is_negative = true;
+        num = -num;
+    }
+
+    *p = '\0'; 
+
+    while (num > 0) {
+        p--; 
+        *p = '0' + (num % 10);
+        num /= 10;
+        len++;
+    }
+
+    if (is_negative) {
+        p--;
+        *p = '-';
+        len++;
+    }
+
+    console_puts(p);
+    return len;
 }
 
 // funcion que configura el conv analogico-digital para leer la bateria(basada en la funcion de archivo adc-dac-printf)
@@ -299,18 +334,20 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
 
     // Bateria en color negro
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
-    sprintf(display_str, "Nivel de bateria: \t: %.2f V", bateria_nivel);
+    sprintf(display_str, "ateria: \t: %.2f V", bateria_nivel);
     gfx_setCursor(5, 30);
     gfx_puts(display_str);
 
+    int battery_width = 60, battery_height = 10;
 
 	// Normalizacion de los valores de la bateria 
     float battery_percentage = (bateria_nivel - 2.0) / (8.5 - 2.0); 
+    int fill_width = battery_percentage * battery_width;
 
 
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
     gfx_setCursor(23, 90);
-    gfx_puts("Giroscopio valores: ");		
+    gfx_puts("Giroscopio: ");		
 
 	// Imprime en valor de x del giroscopio en color magenta
     gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
@@ -325,7 +362,7 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
     gfx_puts(display_str);
 
 	// Imprime en valor de z del giroscopio en color
-    gfx_setTextColor(LCD_YELLOW, LCD_WHITE);
+    gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
     sprintf(display_str, "Z: %d", lectura.z);
     gfx_setCursor(20, 210);
     gfx_puts(display_str);
@@ -334,11 +371,11 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
     gfx_setCursor(3, 250);
     gfx_puts("Comunicacion: ");
-    gfx_setCursor(205, 250);
+    gfx_setCursor(3, 290);
     gfx_puts(enviar ? "On" : "Off");
     
 	// llama la funcion que controla los LEDs (nivel de bateria y cuando hay mas de 5 grados de deformacion)
-    handle_leds(bateria_nivel);
+    leds(bateria_nivel);
 
     lcd_show_frame();
 }
@@ -389,7 +426,7 @@ int main(void) {
 		display_datos(lectura, bateria_nivel, enviar);
 		if (enviar) envio_datos(lectura, bateria_nivel);
 
-		leds(bateria_nivel, enviar);  
+		leds(bateria_nivel);  
 
 		if (gpio_get(GPIOA, GPIO0)) {  
             enviar = !enviar;
