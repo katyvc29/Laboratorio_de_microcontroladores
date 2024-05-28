@@ -367,9 +367,11 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
     gfx_setCursor(3, 260);
     gfx_puts("Temperatura: ");
 
-    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
-    gfx_setCursor(3, 290);
-    gfx_puts("Temperatura: ");
+    gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
+    sprintf(display_str, "Z: %d", lectura.Temp);
+    gfx_setCursor(20, 290);
+    gfx_puts(display_str);
+
 
 	// llama la funcion que controla los LEDs (nivel de bateria y cuando hay mas de 5 grados de deformacion)
     leds(bateria_nivel);
