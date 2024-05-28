@@ -58,30 +58,16 @@
 #define GYR_OUT_Z_L 0X2C
 #define GYR_OUT_Z_H 0X2D
 
-//Se define la sensibielidad del giroscopio
+//Se define la sensibielidad del giroscopio  (encontrado en libopencm3-examples/examples/stm32/f4/stm32f429i-discovery/lcd-serial.c)
 #define SENSITIVITY_250DPS (0.00875F) //@
 
 typedef struct Giroscopio {
   int16_t x;
   int16_t y;
   int16_t z;
+  int16_t Temp;
 } giroscopio;
 
-//void spi_transaction(uint16_t reg, uint16_t val);
-
-//int16_t read_axis(uint8_t lsb_command, uint8_t msb_command);
-
-//uint8_t spi_communication(uint8_t command);
-
-/*
-void send_data(giroscopio lectura, float bateria_lvl);
-void display_data(giroscopio lectura, float bateria_lvl, bool enviar);
-void initialize_system(void);
-void delay(void);
-void handle_leds(float bateria_lvl, bool enviar);
-int print_decimal(int num);
-
-//giroscopio read_xyz(void);     // Función para leer valores de los ejes X, Y y Z */
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Declaracion de funciones
