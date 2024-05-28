@@ -58,7 +58,7 @@
 #define GYR_OUT_Z_L 0X2C
 #define GYR_OUT_Z_H 0X2D
 
-//Sensibielidad del giroscopio
+//Se define la sensibielidad del giroscopio
 #define SENSITIVITY_250DPS (0.00875F) //@
 
 typedef struct Giroscopio {
@@ -67,7 +67,21 @@ typedef struct Giroscopio {
   int16_t z;
 } giroscopio;
 
+//void spi_transaction(uint16_t reg, uint16_t val);
 
+//int16_t read_axis(uint8_t lsb_command, uint8_t msb_command);
+
+//uint8_t spi_communication(uint8_t command);
+
+/*
+void send_data(giroscopio lectura, float bateria_lvl);
+void display_data(giroscopio lectura, float bateria_lvl, bool enviar);
+void initialize_system(void);
+void delay(void);
+void handle_leds(float bateria_lvl, bool enviar);
+int print_decimal(int num);
+
+//giroscopio read_xyz(void);     // Función para leer valores de los ejes X, Y y Z */
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Declaracion de funciones
@@ -75,25 +89,27 @@ void spi_transaction(uint16_t reg, uint16_t val);
 static void spi_setup(void);
 static void usart_setup(void);
 uint8_t spi_communications(uint8_t command);
-uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
+
+int16_t leer_eje(uint8_t lsb_command, uint8_t msb_command);
 giroscopio leer_ejes_xyz(void);
+
 static void gpio_setup(void);
 int print_decimal(int num); 	// basada en lcd-spi.c
-//static void adc_setup(void); 	// basada en adc-dac-printf
-//static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
+static void adc_setup(void); 	// basada en adc-dac-printf
+static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
 void leds(float bateria_nivel);
 void envio_datos(giroscopio lectura, float bateria_nivel);
 void display_datos(giroscopio lectura, float bateria_nivel, bool enviar);
 void inicializacion(void); 
 
+void delay(void);
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 //Funcion para que el giroscopio pueda hacer transacciones por SPI
 void spi_transaction(uint16_t reg, uint16_t val){
-    gpio_clear(GPIOC, GPIO1) //Pome en bajo el chip selectec para comenzar la transaccion SPI
+    gpio_clear(GPIOC, GPIO1); //Pome en bajo el chip selectec para comenzar la transaccion SPI
     spi_send(SPI5, reg);       // Envia el registro al giroscopio
     spi_read(SPI5);            // Lee la respuesta del giroscopio
     spi_send(SPI5, val);       // Envia el valor al giroscopio
@@ -102,7 +118,6 @@ void spi_transaction(uint16_t reg, uint16_t val){
 }
 
 ///////////////////////////////////////////////////////////////////////////
-
 
 //Función para configurar el módulo SPI5 y GPIOs relacionados, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c
 static void spi_setup(void){
@@ -136,6 +151,7 @@ static void spi_setup(void){
     spi_transaction(GYR_CTRL_REG1, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN | GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN | (3 << GYR_CTRL_REG1_BW_SHIFT));
     spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
 }
+
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -171,12 +187,14 @@ uint8_t spi_communications(uint8_t command){
 
 
 }
+
+/*
 ///////////////////////////////////////////////////////////////////////////
 //Funcion que se encarga de leer un eje del giroscopio usando los bits LSB Y MSB
 uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
     int16_t result; //Crea una variable para guardar el resultado
-    result = spi_communication(lsb_command); //Lee el byte menos significativo
-    result |= spi_communication(msb_command) << 8; //Lee el byte más significativo y lo combina con el LSB
+    result = spi_communications(lsb_command); //Lee el byte menos significativo
+    result |= spi_communications(msb_command) << 8; //Lee el byte más significativo y lo combina con el LSB
     return result; //Retorna el valor obtenido
 }
 
@@ -185,9 +203,9 @@ uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
 giroscopio leer_ejes_xyz(void) {
 	giroscopio medicion; //Crea una estructura para el giroscopio 
 
-    spi_communication(GYR_WHO_AM_I | 0x80); //Lee el registro WHO_AM_I del giroscopio
-    spi_communication(GYR_STATUS_REG | GYR_RNW); //Lee el registro STATUS_REG del giroscopio
-    spi_communication(GYR_OUT_TEMP | GYR_RNW);  //Lee el registro OUT_TEMP del giroscopio
+    spi_communications(GYR_WHO_AM_I | 0x80); //Lee el registro WHO_AM_I del giroscopio
+    spi_communications(GYR_STATUS_REG | GYR_RNW); //Lee el registro STATUS_REG del giroscopio
+    spi_communications(GYR_OUT_TEMP | GYR_RNW);  //Lee el registro OUT_TEMP del giroscopio
 
     //Obtiene los valores de los ejes y los escala segun la sensibilidad
     medicion.x = leer_eje(GYR_OUT_X_L | GYR_RNW, GYR_OUT_X_H | GYR_RNW) * SENSITIVITY_250DPS;
@@ -196,7 +214,33 @@ giroscopio leer_ejes_xyz(void) {
 
     return medicion; //Retorna la lectura con los valores de los 3 ejes
 
+}*/
+
+
+int16_t leer_eje(uint8_t lsb_command, uint8_t msb_command) {
+    int16_t result;
+    result = spi_communications(lsb_command);                
+    result |= spi_communications(msb_command) << 8;          
+    return result;                                          
 }
+
+
+giroscopio leer_ejes_xyz(void) {
+    giroscopio lectura;
+
+    spi_communications(GYR_WHO_AM_I | 0x80);                 
+    spi_communications(GYR_STATUS_REG | GYR_RNW);          
+    spi_communications(GYR_OUT_TEMP | GYR_RNW);              
+
+    // Lee y escala los valores de los ejes
+    lectura.x = leer_eje(GYR_OUT_X_L | GYR_RNW, GYR_OUT_X_H | GYR_RNW) * SENSITIVITY_250DPS;
+    lectura.y = leer_eje(GYR_OUT_Y_L | GYR_RNW, GYR_OUT_Y_H | GYR_RNW) * SENSITIVITY_250DPS;
+    lectura.z = leer_eje(GYR_OUT_Z_L | GYR_RNW, GYR_OUT_Z_H | GYR_RNW) * SENSITIVITY_250DPS;
+
+    return lectura; // Devuelve la lectura de los 3 ejes
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Funcion que configura pines GPIO que se van a utilizar como entrada o salida, se basa en el codigo que esta en la libreria libopencm3 en el archivo spi.c 
@@ -213,7 +257,7 @@ static void gpio_setup(void){
 }
 
 
-///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funcion para imprimir un entero como un numero decimal (tomada como base del archivo lcd-spi.c)
 int print_decimal(int num){
 	int	ndx = 0;
@@ -299,46 +343,58 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
 
     // Bateria en color negro
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
-    sprintf(display_str, "Nivel de bateria: \t: %.2f V", bateria_nivel);
-    gfx_setCursor(5, 30);
+    gfx_setCursor(5, 50);
+    gfx_puts("Bateria:");
+    sprintf(display_str, "%.2f V", bateria_nivel);
+    gfx_setCursor(120, 70);
     gfx_puts(display_str);
 
+    //int battery_width = 60, battery_height = 10;
 
 	// Normalizacion de los valores de la bateria 
-    float battery_percentage = (bateria_nivel - 2.0) / (8.5 - 2.0); 
-
+    //float battery_percentage = (bateria_nivel - 2.0) / (8.5 - 2.0); 
+    //int fill_width = battery_percentage * battery_width;
 
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
     gfx_setCursor(23, 90);
-    gfx_puts("Giroscopio valores: ");		
+    gfx_puts("Giroscopio");		
 
 	// Imprime en valor de x del giroscopio en color magenta
     gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
     sprintf(display_str, "X: %d", lectura.x);
-    gfx_setCursor(20, 130);
+    gfx_setCursor(20, 120);
     gfx_puts(display_str);
 
 	// Imprime en valor de y del giroscopio en color azul
     gfx_setTextColor(LCD_BLUE , LCD_WHITE);
     sprintf(display_str, "Y: %d", lectura.y);
-    gfx_setCursor(20, 170);
+    gfx_setCursor(20, 150);
     gfx_puts(display_str);
 
 	// Imprime en valor de z del giroscopio en color
-    gfx_setTextColor(LCD_YELLOW, LCD_WHITE);
+    gfx_setTextColor(LCD_MAGENTA, LCD_WHITE);
     sprintf(display_str, "Z: %d", lectura.z);
-    gfx_setCursor(20, 210);
+    gfx_setCursor(20, 180);
     gfx_puts(display_str);
 
 	// Muestra el estado de la comunicacion
     gfx_setTextColor(LCD_BLACK, LCD_WHITE);
-    gfx_setCursor(3, 250);
+    gfx_setCursor(3, 210);
     gfx_puts("Comunicacion: ");
-    gfx_setCursor(205, 250);
+    gfx_setCursor(3, 235);
     gfx_puts(enviar ? "On" : "Off");
     
+
+    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
+    gfx_setCursor(3, 260);
+    gfx_puts("Temperatura: ");
+
+    gfx_setTextColor(LCD_BLACK, LCD_WHITE);
+    gfx_setCursor(3, 290);
+    gfx_puts("Temperatura: ");
+
 	// llama la funcion que controla los LEDs (nivel de bateria y cuando hay mas de 5 grados de deformacion)
-    handle_leds(bateria_nivel);
+    leds(bateria_nivel);
 
     lcd_show_frame();
 }
@@ -389,7 +445,7 @@ int main(void) {
 		display_datos(lectura, bateria_nivel, enviar);
 		if (enviar) envio_datos(lectura, bateria_nivel);
 
-		leds(bateria_nivel, enviar);  
+		leds(bateria_nivel);  
 
 		if (gpio_get(GPIOA, GPIO0)) {  
             enviar = !enviar;
