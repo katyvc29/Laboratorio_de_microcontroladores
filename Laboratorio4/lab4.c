@@ -174,10 +174,10 @@ uint8_t spi_communications(uint8_t command){
 
 }
 
-/*
+
 ///////////////////////////////////////////////////////////////////////////
 //Funcion que se encarga de leer un eje del giroscopio usando los bits LSB Y MSB
-uint16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
+int16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
     int16_t result; //Crea una variable para guardar el resultado
     result = spi_communications(lsb_command); //Lee el byte menos significativo
     result |= spi_communications(msb_command) << 8; //Lee el byte más significativo y lo combina con el LSB
@@ -200,30 +200,6 @@ giroscopio leer_ejes_xyz(void) {
 
     return medicion; //Retorna la lectura con los valores de los 3 ejes
 
-}*/
-
-
-int16_t leer_eje(uint8_t lsb_command, uint8_t msb_command) {
-    int16_t result;
-    result = spi_communications(lsb_command);                
-    result |= spi_communications(msb_command) << 8;          
-    return result;                                          
-}
-
-
-giroscopio leer_ejes_xyz(void) {
-    giroscopio lectura;
-
-    spi_communications(GYR_WHO_AM_I | 0x80);                 
-    spi_communications(GYR_STATUS_REG | GYR_RNW);          
-    spi_communications(GYR_OUT_TEMP | GYR_RNW);              
-
-    // Lee y escala los valores de los ejes
-    lectura.x = leer_eje(GYR_OUT_X_L | GYR_RNW, GYR_OUT_X_H | GYR_RNW) * SENSITIVITY_250DPS;
-    lectura.y = leer_eje(GYR_OUT_Y_L | GYR_RNW, GYR_OUT_Y_H | GYR_RNW) * SENSITIVITY_250DPS;
-    lectura.z = leer_eje(GYR_OUT_Z_L | GYR_RNW, GYR_OUT_Z_H | GYR_RNW) * SENSITIVITY_250DPS;
-
-    return lectura; // Devuelve la lectura de los 3 ejes
 }
 
 
