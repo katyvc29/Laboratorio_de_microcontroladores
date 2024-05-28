@@ -58,8 +58,10 @@
 #define GYR_OUT_Z_L 0X2C
 #define GYR_OUT_Z_H 0X2D
 
-//Se define la sensibielidad del giroscopio  (encontrado en libopencm3-examples/examples/stm32/f4/stm32f429i-discovery/lcd-serial.c)
+//Se define las diferentes sensibilidades del giroscopio  (encontrado en libopencm3-examples/examples/stm32/f4/stm32f429i-discovery/lcd-serial.c)
 #define SENSITIVITY_250DPS (0.00875F) //@
+#define L3GD20_SENSITIVITY_500DPS  (0.0175F)       
+#define L3GD20_SENSITIVITY_2000DPS (0.070F) 
 
 typedef struct Giroscopio {
   int16_t x;
@@ -89,7 +91,7 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar);
 void inicializacion(void); 
 
 void delay(void);
-
+int16_t  leer_temp(uint8_t command);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -185,6 +187,19 @@ int16_t leer_eje(uint8_t lsb_command, uint8_t msb_command){
 }
 
 ///////////////////////////////////////////////////////////////////////////
+int16_t leer_temp(uint8_t command) {
+ 
+	gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
+	spi_send(SPI5, command ); // Envia el comando por SPI5
+	spi_read(SPI5); //Lee la respuesta desde SPI5
+	spi_send(SPI5, 0); // Envia el comando por SPI5 en este caso 0, porque temp solo tiene un registro
+	int16_t  result = spi_read(SPI5) << 8; //Lee la respuesta del SPI5 combinandola con el lsb
+	gpio_set(GPIOC, GPIO1); //Termina la comunicacion 
+
+       return result;                     // Devuelve el resultado leído
+}
+
+///////////////////////////////////////////////////////////////////////////
 //Funcion para leer los valores de los ejes X, Y, Z del giroscopio
 giroscopio leer_ejes_xyz(void) {
 	giroscopio medicion; //Crea una estructura para el giroscopio 
@@ -198,7 +213,8 @@ giroscopio leer_ejes_xyz(void) {
     medicion.y = leer_eje(GYR_OUT_Y_L | GYR_RNW, GYR_OUT_Y_H | GYR_RNW) * SENSITIVITY_250DPS;
     medicion.z = leer_eje(GYR_OUT_Z_L | GYR_RNW, GYR_OUT_Z_H | GYR_RNW) * SENSITIVITY_250DPS;
 
-    return medicion; //Retorna la lectura con los valores de los 3 ejes
+    medicion,Temp = leer_temp(GYR_OUT_TEMP | GYR_RNW)* L3GD20_SENSITIVITY_500DPS;
+    return medicion; //Retorna la lectura con los valores de los 3 ejes y la temperatura
 
 }
 
