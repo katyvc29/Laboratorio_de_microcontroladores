@@ -49,6 +49,11 @@
 #define GYR_CTRL_REG1_BW_SHIFT 4 //Cambios en el ancho de banda
 #define GYR_CTRL_REG4           0x23 //Configura el registro de control 4 **escala de medicion
 #define GYR_CTRL_REG4_FS_SHIFT 4 //Cambios en la escala 
+#define GYR_CTRL_REG2          0x21 //Configura el registro de control 2, para filtros
+#define GYR_CTRL_REG2__SHIFT 0 //Cambios en el filtro paso alto
+
+
+
 
 //Direcciones de los registros de datos del girocospio
 #define GYR_OUT_X_L 0X28
