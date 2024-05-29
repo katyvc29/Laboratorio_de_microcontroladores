@@ -85,9 +85,9 @@ static void gpio_setup(void);
 int print_decimal(int num); 	// basada en lcd-spi.c
 static void adc_setup(void); 	// basada en adc-dac-printf
 static uint16_t read_adc_naiive(uint8_t channel);	//basada en adc-dac-printf
-void leds(float bateria_nivel);
-void envio_datos(giroscopio lectura, float bateria_nivel);
-void display_datos(giroscopio lectura, float bateria_nivel, bool enviar);
+void leds(float bateria_nivel, bool def_ang);
+void envio_datos(giroscopio lectura, float bateria_nivel, bool def_ang);
+void display_datos(giroscopio lectura, float bateria_nivel, bool enviar, bool def_ang);
 void inicializacion(void); 
 
 void delay(void);
@@ -213,7 +213,7 @@ giroscopio leer_ejes_xyz(void) {
     medicion.y = leer_eje(GYR_OUT_Y_L | GYR_RNW, GYR_OUT_Y_H | GYR_RNW) * SENSITIVITY_250DPS;
     medicion.z = leer_eje(GYR_OUT_Z_L | GYR_RNW, GYR_OUT_Z_H | GYR_RNW) * SENSITIVITY_250DPS;
 
-    medicion,Temp = leer_temp(GYR_OUT_TEMP | GYR_RNW)* L3GD20_SENSITIVITY_500DPS;
+    medicion.Temp = leer_temp(GYR_OUT_TEMP | GYR_RNW)* L3GD20_SENSITIVITY_500DPS;
     return medicion; //Retorna la lectura con los valores de los 3 ejes y la temperatura
 
 }
@@ -287,8 +287,12 @@ static uint16_t read_adc_naiive(uint8_t channel){
 
 
 // funcion para los LED que indican bateria baja y deformacion mayor a 5 grados
-void leds(float bateria_nivel) {
-
+void leds(float bateria_nivel, bool def_ang) {
+    if (def_ang) {
+        gpio_toggle(GPIOG, GPIO13);                   // Si la deformacion es mayor a 5 grados parpadea
+    } else {
+        gpio_clear(GPIOG, GPIO13);                    // Si no se mantiene apagadoS
+    }
 	// agregar lo de 5 grados 
 
     if (bateria_nivel < 7) {
@@ -299,7 +303,7 @@ void leds(float bateria_nivel) {
 }
 
 // 
-void envio_datos(giroscopio lectura, float bateria_nivel) {
+void envio_datos(giroscopio lectura, float bateria_nivel, bool def_ang) {
     print_decimal(lectura.x);                         // Imprime X del giroscopio
     console_puts("\t");                               
     print_decimal(lectura.y);                         // Imprime Y del giroscopio
@@ -309,10 +313,10 @@ void envio_datos(giroscopio lectura, float bateria_nivel) {
     print_decimal(bateria_nivel);                     // Imprime la tension de la batería
     console_puts("\n");                              
 
-    leds(bateria_nivel);                   	 // llama a la funcion que controla los LEDs
+    leds(bateria_nivel, def_ang);                   	 // llama a la funcion que controla los LEDs
 }	 
 
-void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
+void display_datos(giroscopio lectura, float bateria_nivel, bool enviar, bool def_ang) {
     char display_str[50];
     
     // Pone la pantalla en blanco y configura tamano del texto
@@ -374,7 +378,7 @@ void display_datos(giroscopio lectura, float bateria_nivel, bool enviar) {
 
 
 	// llama la funcion que controla los LEDs (nivel de bateria y cuando hay mas de 5 grados de deformacion)
-    leds(bateria_nivel);
+    leds(bateria_nivel, def_ang);
 
     lcd_show_frame();
 }
@@ -418,14 +422,22 @@ int main(void) {
 	//Bucle principal del sistema
 	while(1){
 		lectura = leer_ejes_xyz();
+        bool def_ang = false;
 		gpio_set(GPIOC, GPIO1);
 		input_adc0 = read_adc_naiive(3);
 		bateria_nivel = (input_adc0 * 9.0f) / 4095.0f;
 
-		display_datos(lectura, bateria_nivel, enviar);
-		if (enviar) envio_datos(lectura, bateria_nivel);
+        float  xy_angulo = atan (lectura.x / lectura.y) * 180 / 3.14159265; 
+        float z_angulo = acos(lectura.z / (sqrt(pow(lectura.x, 2) + pow(lectura.y, 2) + pow(lectura.z, 2)))) * 180 / 3.14159265;  
 
-		leds(bateria_nivel);  
+        
+        if (fabs( xy_angulo) >= 5 || fabs(z_angulo-90) >= 5)  def_ang = true; 
+        else def_ang = false;
+
+		display_datos(lectura, bateria_nivel, enviar, def_ang);
+		if (enviar) envio_datos(lectura, bateria_nivel, def_ang);
+
+		leds(bateria_nivel, def_ang);  
 
 		if (gpio_get(GPIOA, GPIO0)) {  
             enviar = !enviar;
@@ -437,3 +449,4 @@ int main(void) {
 	return 0; 
 
 }
+
