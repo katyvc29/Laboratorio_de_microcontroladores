@@ -41,13 +41,21 @@ class IOTClient:
         raw_data = self.data.readline().decode('utf-8').rstrip()
 
         cleaned_data = raw_data.replace("\r", "").replace("\n", "").split('\t')
-        if len(cleaned_data) == 4:
+        if len(cleaned_data) == 6:
             return {
                 "Eje X": cleaned_data[0],
                 "Eje Y": cleaned_data[1],
                 "Eje Z": cleaned_data[2],
-                "Bateria": cleaned_data[3],
-                "Alerta Bateria": "Baja" if float(cleaned_data[3]) < 7 else "Normal"
+                "Temperatura": cleaned_data[3],
+                "Bateria": cleaned_data[4],
+                
+                
+                
+                #Verificar si hay bateria baja
+                "Alerta Bateria": "Baja" if float(cleaned_data[4]) < 7 else "Normal"
+                #Verificar si hay deformacion
+                "Alerta deformacion": "Si" if cleaned_data[5] == TRUE else "No"
+                
             }
         return {"Mensaje": "No se esta recibiendo datos."}
 
