@@ -316,6 +316,7 @@ void envio_datos(giroscopio lectura, float bateria_nivel, bool def_ang) {
     print_decimal(lectura.y);                         // Imprime Y del giroscopio
     console_puts("\t");                               
     print_decimal(lectura.z);                         // Imprime Z del giroscopio
+    console_puts("\t"); 
     print_decimal(lectura.Temp);                         // Imprime la temperatura del giroscopio
     console_puts("\t");                               
     print_decimal(bateria_nivel);                     // Imprime la tension de la batería
