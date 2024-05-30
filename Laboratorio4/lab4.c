@@ -50,7 +50,8 @@
 #define GYR_CTRL_REG4           0x23 //Configura el registro de control 4 **escala de medicion
 #define GYR_CTRL_REG4_FS_SHIFT 4 //Cambios en la escala 
 #define GYR_CTRL_REG2          0x21 //Configura el registro de control 2, para filtros
-#define GYR_CTRL_REG2__SHIFT 0 //Cambios en el filtro paso alto
+#define HPM_NORMAL_MODE (0 << 6) //Modo normal del filtro pasa altos
+#define  GYR_CTRL_REG2_VALUE  0x01  //Frecuencia de corte del filtro de paso alto
 
 
 
@@ -143,6 +144,8 @@ static void spi_setup(void){
     //Se llama la funcion que realiza las transacciones SPI para configurar el giroscopio
     spi_transaction(GYR_CTRL_REG1, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN | GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN | (3 << GYR_CTRL_REG1_BW_SHIFT));
     spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
+}
+    spi_transaction(GYR_CTRL_REG2, HPM_NORMAL_MODE | GYR_CTRL_REG2_VALUE);
 }
 
 
