@@ -144,7 +144,6 @@ static void spi_setup(void){
     //Se llama la funcion que realiza las transacciones SPI para configurar el giroscopio
     spi_transaction(GYR_CTRL_REG1, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN | GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN | (3 << GYR_CTRL_REG1_BW_SHIFT));
     spi_transaction(GYR_CTRL_REG4, (1 << GYR_CTRL_REG4_FS_SHIFT));
-}
     spi_transaction(GYR_CTRL_REG2, HPM_NORMAL_MODE | GYR_CTRL_REG2_VALUE);
 }
 
