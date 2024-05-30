@@ -41,22 +41,23 @@ class IOTClient:
         raw_data = self.data.readline().decode('utf-8').rstrip()
 
         cleaned_data = raw_data.replace("\r", "").replace("\n", "").split('\t')
-        if len(cleaned_data) == 6:
+        if len(cleaned_data) == 5:
             return {
                 "Eje X": cleaned_data[0],
                 "Eje Y": cleaned_data[1],
                 "Eje Z": cleaned_data[2],
                 "Temperatura": cleaned_data[3],
                 "Bateria": cleaned_data[4],
-                
-                
-                
-                #Verificar si hay bateria baja
+
                 "Alerta Bateria": "Baja" if float(cleaned_data[4]) < 7 else "Normal"
+
+                #"Def": cleaned_data[5]
                 #Verificar si hay deformacion
-                "Alerta deformacion": "Si" if cleaned_data[5] == TRUE else "No"
+                #"Alerta deformacion": "Si" if cleaned_data[5] == 1 else "No"
                 
             }
+
+        
         return {"Mensaje": "No se esta recibiendo datos."}
 
     def run(self):
@@ -74,7 +75,7 @@ if __name__ == "__main__":
         broker="iot.eie.ucr.ac.cr",
         port=1883,
         topic="v1/devices/me/telemetry",
-        token="pomx4ylv1jjxlms2a0ti",
+        token="538pxoj1fyhas8t1n0zz",
         serial_port="/dev/ttyACM0",
         baudrate=115200
     )
