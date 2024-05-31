@@ -75,7 +75,9 @@ if __name__ == "__main__":
         broker="iot.eie.ucr.ac.cr",
         port=1883,
         topic="v1/devices/me/telemetry",
-        token="538pxoj1fyhas8t1n0zz",
+        topiccreq = "v1/devices/me/attributes/request/1",
+        token="xpc17o61gfo1uvmuad38",
+        username = "iot_B88138_B94031",
         serial_port="/dev/ttyACM0",
         baudrate=115200
     )
