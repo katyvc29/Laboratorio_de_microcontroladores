@@ -26,15 +26,15 @@ void loop() {
   while (!APDS.colorAvailable() || !APDS.proximityAvailable()) {}
 
   // Lee los valores de color y luminosidad del sensor
-  APDS.readColor(rojo, verde, azul, lum, prox);
+  APDS.readColor(rojo, verde, azul, lum);
   
   prox = APDS.readProximity();  //Lee el valor de proximidad del sensor.
-  sum = rojo + verde + azul + lum +  prox; //Lee el valor de proximidad del sensor.
+  suma = rojo + verde + azul + lum +  prox; //Lee el valor de proximidad del sensor.
 
   /* Si se dan las condiciones de proximidad mayor que 0, la suma de los colores mayor a cero y una luminosidad mayor a 10, 
   calcula las proporciones de los colores RGB, y luego los imprime junta a la humedad y 
   la temperatura que está detectando el sensor */
-  if (if ( prox >= 0 && lum > 10 && suma > 0) {
+  if ( prox >= 0 && lum > 10 && suma > 0) {
 
     float redRatio = rojo / suma;
     float greenRatio = verde / suma;
@@ -59,4 +59,5 @@ void loop() {
 
   // wait 1 second to print again
   delay(1000);
+
 }
