@@ -161,7 +161,7 @@ static void usart_setup(void){
 
 //Funcion para realizar una configuracion SPI con el giroscopio y obtener una respuesta
 uint8_t spi_communications(uint8_t command){
-     gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
+    gpio_clear(GPIOC, GPIO1); //Desactiva el pin GPIO1 de GPIOC, osea el  chip select, para iniciar la comunicacion
     spi_send(SPI5, command);// Envia el comando por SPI5
     spi_read(SPI5); //Lee una respuesta desde SPI5
     spi_send(SPI5, 0);//Envia un byte en 0 por SPI5
