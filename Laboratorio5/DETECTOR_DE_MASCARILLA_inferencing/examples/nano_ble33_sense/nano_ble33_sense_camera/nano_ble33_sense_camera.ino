@@ -31,7 +31,6 @@
 #define LEDR 22
 #define LEDG 23
 #define LEDB 24
-
 /*
  ** NOTE: If you run into TFLite arena allocation issue.
  **
@@ -145,11 +144,13 @@ void setup()
     ei_printf("\tImage resolution: %dx%d\n", EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT);
     ei_printf("\tFrame size: %d\n", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
     ei_printf("\tNo. of classes: %d\n", sizeof(ei_classifier_inferencing_categories) / sizeof(ei_classifier_inferencing_categories[0]));
+
     
   //Se inicializan los pines del led RGB como salida para encenderlo cuando sea necesario
     pinMode(LEDR, OUTPUT);
     pinMode(LEDG, OUTPUT);
     pinMode(LEDB, OUTPUT);
+
 }
 
 /**
