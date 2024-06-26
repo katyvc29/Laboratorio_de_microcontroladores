@@ -146,7 +146,7 @@ void setup()
     ei_printf("\tFrame size: %d\n", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
     ei_printf("\tNo. of classes: %d\n", sizeof(ei_classifier_inferencing_categories) / sizeof(ei_classifier_inferencing_categories[0]));
     
-  //Se define los pines del led RGB como salida para encenderlo cuando sea necesario
+  //Se inicializan los pines del led RGB como salida para encenderlo cuando sea necesario
     pinMode(LEDR, OUTPUT);
     pinMode(LEDG, OUTPUT);
     pinMode(LEDB, OUTPUT);
