@@ -216,6 +216,27 @@ void loop()
             break;
         }
 
+        //Condicionales  para encender los leds 
+         //Led azul si no se detecta una persona
+        if (result.classification[0].value >= 0.7){
+          digitalWrite(LEDR, HIGH);
+          digitalWrite(LEDG, HIGH);
+          digitalWrite(LEDB, LOW);
+        }
+        //Led verde cuando se detecta una persona con mascarilla
+        else if (result.classification[1].value >= 0.7){
+          digitalWrite(LEDR, HIGH);
+          digitalWrite(LEDG, LOW);
+          digitalWrite(LEDB, HIGH);
+          
+        }
+        //Led rojo cuando se detecta una persona sin mascarilla
+        else if (result.classification[2].value >= 0.7){
+          digitalWrite(LEDR, LOW);
+          digitalWrite(LEDG, HIGH);
+          digitalWrite(LEDB, HIGH);
+        }
+
         // print the predictions
         ei_printf("Predictions (DSP: %d ms., Classification: %d ms., Anomaly: %d ms.): \n",
                   result.timing.dsp, result.timing.classification, result.timing.anomaly);
