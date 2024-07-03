@@ -1,4 +1,5 @@
 #include <Arduino_LPS22HB.h>
+#include <Arduino_APDS9960.h> //RGB
 
 void setup() {
   Serial.begin(115200); // Cambiado a 115200
