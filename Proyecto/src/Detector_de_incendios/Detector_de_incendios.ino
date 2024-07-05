@@ -38,12 +38,11 @@ uint8_t poll_APDS_proximity(void);
 uint8_t poll_APDS_gesture(void);
 
 eiSensors sensors[] = {
-
     {"rojo", &data[0], &poll_APDS_color, &init_APDS, NOT_USED},
     {"verde", &data[1], &poll_APDS_color, &init_APDS, NOT_USED},
     {"azul", &data[2], &poll_APDS_color, &init_APDS, NOT_USED},
     {"presion", &data[3], &poll_BARO, &init_BARO, NOT_USED},
-    {"temperatura", &data[4], &poll_BARO, &init_BARO, NOT_USED}, /////////////////
+    {"temperatura", &data[4], &poll_BARO, &init_BARO, NOT_USED}, 
 };
 
 void setup() {
@@ -124,7 +123,7 @@ void loop() {
 
     ei_printf("Predictions (DSP: %d ms., Classification: %d ms., Anomaly: %d ms.):\r\n",
         result.timing.dsp, result.timing.classification, result.timing.anomaly);
-    //int contador = 0;
+
     for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
         ei_printf("%s: %.5f\r\n", result.classification[ix].label, result.classification[ix].value);
 
